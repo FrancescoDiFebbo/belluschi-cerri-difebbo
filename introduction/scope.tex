@@ -1,0 +1,23 @@
+The system described in this document is a taxi service for large cities.
+The main goals of the system are: 1) simplify the access of passangers to the service 2) guarantee a fair management of taxi queues.
+The system is composed by a web application, a mobile application and a web server.
+
+There are three types of actors that can use the system: visitors, taxi drivers and passengers.
+Visitors have only two operations allowed: log in or sign in.
+Passengers can use both the web application and the mobile application to request a taxi.
+Taxi drivers use only the mobile application to modify their status and to confirm to the system that they are going to take care of a certain request from a certain passenger.
+
+The system, when a passenger request a taxi, informs an available taxi driver (FIFO mode) about the current position of that passenger. 
+At this time the taxi driver has two options:
+\begin{itemize}
+\item accept : the system sends a notification to the passenger with the estimated waiting time
+\item reject : the system searches for another available taxi driver
+\end{itemize}
+
+The system allows also a passenger to:
+\begin{itemize}
+\item reserve a taxi by specifying the origin and the destination of the ride
+\item share a taxi with others (if possible) by specifying all the rides that he/she wants to share. In this case the system defines the cost of the ride for each passenger
+\end{itemize}
+
+Besides the specific user interfaces for passengers and taxi drivers, the system offers also APIs to enable the development of additional services on top of the basic one.
