@@ -1,0 +1,27 @@
+\subsection{Performance Requirements}
+MyTaxiService will perform 95\% of the operations within 4 second; the total amount of the operations within 10 seconds.
+The system should ensure at least 2000 passangers connected and 500 taxi drivers connected. 
+
+\subsection{Software System attribute}
+
+\paragraph{Availability}
+MyTaxiService should be available 99\% of the time . In order to do this, a a dedicated server will be used.
+
+\paragraph{Maintainability}
+The implementation of MyTaxiService must be documented with javadoc. 
+
+\paragraph{Portability}
+The system could be used on any OS specified in Hardware Limitation Section.
+
+\subsection{Security}
+
+\paragraph{External Interface Side}
+MytaxiService implements a login authentication to protect the information of users. Users, after the registration, have to confirm their e-mail with the security code sent to the e-mail write in the registration form. 
+
+\paragraph{Application Side}
+MyTaxiService must detect SQL injection in order to protect user information. 
+
+\paragraph{Server Side}
+The server side architecture will be implemented separating
+data from application.Application Server must be separated
+from database and from the web server. All zone are divided by firewall. 
