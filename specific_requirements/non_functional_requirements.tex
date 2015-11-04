@@ -1,27 +1,31 @@
-\subsection{Performance Requirements}
-MyTaxiService will perform 95\% of the operations within 4 second; the total amount of the operations within 10 seconds.
-The system should ensure at least 2000 passangers connected and 500 taxi drivers connected. 
+\section{Performance Requirements}
+%TODO
+myTaxiService will perform 95\% of the operations within 4 second; the total amount of the operations within 10 seconds.
+The system should ensure at least 2000 passangers connected and 500 taxi drivers connected.
 
-\subsection{Software System attribute}
+\section{Design constraints}
+myTaxiService wants to reach most of taxi drivers and passengers, requiring minimum specifications for devices.
+Taxi drivers, registered to the system, have to use their own devices provided with GPS navigation system to perform the service. Mobile applications have to offer backward compatibility.
 
+\section{Software system attributes}
+\paragraph{Reliability}
+The mean time between failures (MTBF) shall exceed 3 months.
 \paragraph{Availability}
-MyTaxiService should be available 99\% of the time . In order to do this, a a dedicated server will be used.
-
+In order to maintain the system up-to-date and secure, myTaxiServer schedules downtime periods where will be executed routine operations. The service should be available 99\% of the time.
+\paragraph{Security}
+myTaxiService to ensure service availability and data protection use:
+\begin{itemize}
+	\item AES cryptography algorithm on network operations
+	\item Data are encrypted and stored in backup drives to prevent system failure
+	\item Login authentication. Users, after the registration, have to confirm their e-mail with the security code sent to the e-mail write in the registration form
+	\item SQL injection detection
+\end{itemize}
+Server architecture will be implemented separating
+data from application. Application server must be separated
+from database and from the web server. All architectures are divided by firewalls.
 \paragraph{Maintainability}
-The implementation of MyTaxiService must be documented with javadoc. 
-
+To ensure an easy maintenance of the software, it must be well-documented and written following coding patterns.
 \paragraph{Portability}
-The system could be used on any OS specified in Hardware Limitation Section.
-
-\subsection{Security}
-
-\paragraph{External Interface Side}
-MytaxiService implements a login authentication to protect the information of users. Users, after the registration, have to confirm their e-mail with the security code sent to the e-mail write in the registration form. 
-
-\paragraph{Application Side}
-MyTaxiService must detect SQL injection in order to protect user information. 
-
-\paragraph{Server Side}
-The server side architecture will be implemented separating
-data from application.Application Server must be separated
-from database and from the web server. All zone are divided by firewall. 
+Web programming ensures a wide target of browser. Mobile applications instead, cause of different languages and devices, have to be written following coding patterns for easy portability.
+Availability of the service is ensured by hardware and software limitations in Section 2.4.2.
+\section{Other requirements}

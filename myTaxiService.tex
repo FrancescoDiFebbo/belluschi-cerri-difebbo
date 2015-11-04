@@ -1,15 +1,13 @@
 \documentclass[]{report}
 \usepackage{graphicx}
 
-% Title Page
-\title{{\Huge \emph{myTaxiService}}\linebreak Requirements Analysis and Specification Document}
+\title{{\Huge\textit{myTaxiService}}\\Requirements Analysis and Specification Document}
 \author{Belluschi Marco, Cerri Stefano, Di Febbo Francesco}
 
 \begin{document}
 \maketitle
 \tableofcontents
 
-%INTRODUCTION
 \chapter{Introduction}
 
 \section{Purpose}
@@ -18,26 +16,15 @@
 \section{Scope}
 \input{introduction/scope.tex}
 
-%\section{Goals}
-%\input{introduction/goals.tex}
-
-\section{Definitions, Acronyms, Abbreviations}
+\section{Definitions, acronyms, and abbreviations}
 \input{introduction/definitions_acronyms_abbreviations.tex}
 
-\section{Actors}
-\input{introduction/actors.tex}
-
-\section{Identifying stakeholders}
-\input{introduction/stakeholders.tex}
-
-\section{Reference documents}
+\section{References}
 \input{introduction/reference_documents.tex}
 
 \section{Overview}
 \input{introduction/overview.tex}
 
-
-%OVERALL DESCRIPTION
 \chapter{Overall Description}
 
 \section{Product perspective}
@@ -52,51 +39,37 @@
 \section{Constraints}
 \input{overall_description/constraints.tex}
 
-\section{Assumptions and Dependencies}
+\section{Assumptions and dependencies}
 \input{overall_description/assumptions_dependencies.tex}
 
-\section{Future implementation}
+\section{Apportioning of requirements}
 \input{overall_description/future_implementation.tex}
 
-%SPECIFIC REQUIREMENTS
 \chapter{Specific Requirements}
 
-\section{External Interface Requirements}
+\section{External interface requirements}
 \input{specific_requirements/external_interface_requirements.tex}
 
-\section{Functional Requirements}
+\section{Functional requirements}
 \input{specific_requirements/functional_requirements.tex}
 
-\section{The world and the machine}
-\input{specific_requirements/the_world.tex}
-
-\section{Scenarios}
-\input{specific_requirements/scenarios.tex}
-
-\section{UML Models}
-\input{specific_requirements/uml_models.tex}
-
-\section{Non Functional Requirements}
 \input{specific_requirements/non_functional_requirements.tex}
 
-%\chapter{Appendix}
-%
-%\section{Alloy}
-%
-%\section{Software and tool used}
-%
-%\section{Hours of works}
-%
-%\chapter{Revision}
-%
-%\section{Changed Assumptions}
-%
-%\section{Removed goal and functionality}
-%
-%\section{Modified Functional Requirements}
-%
-%\section{Modified scenarios and Use Cases}
-%
-%\section{Modified Diagrams}
+\appendix
+
+\chapter{Appendix}
+
+\section{Actors}
+\input{introduction/actors.tex}
+
+\section{Identifying stakeholders}
+\input{introduction/stakeholders.tex}
+
+\section{Alloy}
+
+\section{Software and tool used}
+
+\section{Hours of works}
+
 \end{document}
        
