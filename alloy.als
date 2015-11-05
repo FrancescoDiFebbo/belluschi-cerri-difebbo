@@ -1,17 +1,22 @@
 // ALLOY CODE FOR MYTAXSERVICE
+module MyTaxiService
+// Defines Bool, True, False
+open util/boolean
 
+// Dates are expressed as the number of seconds from 1970-01-01 
 
 //SIGNATURES
 sig Strings{}
 
 abstract sig User {
-email : one Strings,
-username: one Strings,
-password: one Strings,
-name: one Strings,
-surname: one Strings,
-address: one Strings,
-telephoneNumber: one Strings
+	email : one Strings,
+	emailConfirmed: one Bool,
+	username: one Strings,
+	password: one Strings,
+	name: one Strings,
+	surname: one Strings,
+	address: lone Strings,
+	telephoneNumber: lone Strings
 }
 
 sig Passenger extends User{
@@ -42,6 +47,7 @@ sig Float{
 sig Position {
 	latitude: one Float,
 	longitude: one Float,
+	zone: one TaxiZone,
 }
 
 abstract sig RideStatus{}
@@ -49,16 +55,15 @@ sig ONGOING extends RideStatus {}
 sig COMPLETED extends RideStatus {}
 
 sig Ride {
-	startPosition: Position,
-	endPosition: Position,
-	//Much easier if with put Int instead of Date
-	startDate: Int,
-	endDate: Int,
+	startPosition:one Position,
+	endPosition:one Position,
+	startDate:one Int,
+	endDate:lone Int,
 	status: one RideStatus,
 	taxiDriver: one TaxiDriver,
 	passengers: some Passenger,
 	numOfPassengers: one Int,
-	requests: some RideRequest
+    requests: some RideRequest
 }
 {
 	#requests > 0
@@ -66,36 +71,41 @@ sig Ride {
 	startDate < endDate
 	numOfPassengers <= taxiDriver.numberOfSeats
 	#passengers <= numOfPassengers
+	#endDate=0 iff status= ONGOING
+	#endDate=1 iff status= COMPLETED
 }
 
 abstract sig RideRequestStatus{}
-sig SEARCHING extends RideRequestStatus {}
+sig PENDING extends RideRequestStatus {}
 sig ACCEPTED extends RideRequestStatus {}
 
 sig RideRequest{
 	startPosition: one Position,
+	endPosition: lone Position,
 	requestDate: Int,
+	ride: lone Ride,
+	//passenger that requests the ride
 	passenger: one Passenger,
+	//additional passengers specified in the request
 	numberOfPassengers: one Int,
-	taxiDriver: one TaxiDriver,
-	status: one RideRequestStatus
+	taxiDriver: lone TaxiDriver,
+	status: one RideRequestStatus,
+	isShared: one Bool
 }
 {
+	endPosition != startPosition
+    #endPosition=0 iff isShared = False
+	(#ride=0 or #taxiDriver=0) iff status = PENDING
+	(#ride=1 and #taxiDriver=1) iff status = ACCEPTED
 	requestDate>0
 	numberOfPassengers > 0
 }
 
-//TODO overlap extends
 sig ReserveRideRequest extends RideRequest{
-	startDate: one Int,
-	endPosition: one Position
+	startDate: one Int
 }
 {
 	startDate >0
-}
-
-sig ShareRideRequest extends RideRequest{
-	endPosition: one Int
 }
 	
 sig TaxiZone{
@@ -127,39 +137,122 @@ fact UniqueTaxiZone {
 	queue = ~zone
 }
 
-//if a taxi driver has the status READY, he/she has to put into a queue (only one)
+//if a taxi driver has the status READY, he/she has to put into some queues
+fact QueuesForReadyTaxiDriver{
+	all t: TaxiDriver | ((t.status = READY)  iff (some q: Queue | t in q.taxiDrivers))
+}
 
-//a taxi must be busy during the time of the ride
+//if a taxi is in a queue must be only in one of them
+fact TaxiDriverInOnlyOneQueue {
+	all t: TaxiDriver | (lone q: Queue | t in q.taxiDrivers)
+}
+//a taxi must be BUSY during the time of the ride
+fact BusyDuringRide {
+	all t: TaxiDriver, r: Ride| (r.taxiDriver = t and r.status = ONGOING)
+		implies (t.status= BUSY)
+}
 
 //a passenger cannot take two ride at the same time
 fact noPassengerOverlapRide {
-	all p: Passenger, r1, r2: Ride | (p in r1.passengers
-		and p in r2.passengers and r1 != r2)
-		implies
-		(r1.endDate < r2.startDate or r2.endDate < r1.startDate)
+	all p: Passenger, r1, r2: Ride | (p in r1.passengers and p in r2.passengers and r1 != r2)
+		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
 
 //a taxi driver cannot take two ride at the same time
 fact noTaxiDriverOverlapRide {
-	all t: TaxiDriver, r1, r2: Ride | (t in r1.taxiDriver
-		and t in r2.taxiDriver and r1 != r2)
-		implies
-		(r1.endDate < r2.startDate or r2.endDate < r1.startDate)
+	all t: TaxiDriver, r1, r2: Ride | (t in r1.taxiDriver and t in r2.taxiDriver and r1 != r2)
+		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
+}
+
+//a Ride cointains only ACCEPTED ride request
+fact RideWithOnlyAcceptedRideRequest{
+	all r: Ride, rr: r.requests| rr.status = ACCEPTED and rr.ride = r
+}
+
+//a Ride Request cannot be in two different Ride 
+fact RideWithOnlyAcceptedRideRequest{
+	 no  r1,r2 :Ride | r1!=r2 and (r1.requests=r2.requests)
+}
+
+//A ride that has more than one RideRequest must have only RideRequest shared
+fact RideWithRequestsSharing {
+	all r: Ride| (#r.requests>1)
+		iff (all rr:r.requests|(rr.isShared = True ))
+}
+
+//if a ride refer to a ride request the taxi driver must be the same
+fact taxiDriverUniqueRideReferRideRequest {
+	all rr: RideRequest | rr.ride.taxiDriver = rr.taxiDriver
+}
+
+//if a ride refer to a ride request the passenger of the Ride Request must be in the passenger of the Ride
+fact taxiDriverUniqueRideReferRideRequest {
+	all rr: RideRequest | rr.passenger in rr.ride.passengers
+}
+
+//the number of passengers in a Ride in the same of the sum of the passenger of the Ride Request asssociated
+fact passengersSumEqualToAssociatedRideRequests{
+	all r: Ride | r.numOfPassengers =   r.requests.numberOfPassengers
+}
+
+//a passenger cannot take another request when is in a ongoing ride
+fact noPassengerOverlapRideRequest {
+	all p: Passenger, r1, r2: RideRequest | (p = r1.passenger and p = r2.passenger and r1 != r2)
+		implies (r1.ride.endDate < r2.ride.startDate or r2.ride.endDate < r1.ride.startDate)
+}
+
+//the reserve date of a request must be before the start date of a ride
+fact reserveDateBeforeRide{
+	all r: ReserveRideRequest | r.startDate<r.ride.startDate
 }
 
 
-//a position in a zone must not be position in any other zone 
+// ASSERTION 
 
-//if the status of a ride request is SEARCHING the value of the Taxi Driver must be null
+//all taxi in at maximum one queue
+assert TaxiDriverInOneQueue {
+	all t: TaxiDriver | (lone q: Queue | t in q.taxiDrivers)
+}
 
-//if the status of a ride request is ACCEPTED there must be a RideRequest in Request
+//check TaxiDriverInOneQueue 
+//No counterexample found. Assertion may be valid
+
+//No another ride if the taxi driver is busy
+assert noAnotherRideIfTaxiDriverBusy {
+	all  r1, r2: Ride | (r1.taxiDriver=r2.taxiDriver and r1 != r2)
+		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
+}
+
+//check noAnotherRideIfTaxiDriverBusy
+//No counterexample found. Assertion may be valid
+
+//No another ride if the passenger is going in another ride
+assert noAnotherRideIfPassengerIsGoingInAnotherRide {
+	all  r1, r2: Ride | (r1.passengers=r2.passengers and r1 != r2)
+			implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
+}
+//check noAnotherRideIfPassengerIsGoingInAnotherRide
+//No counterexample found. Assertion may be valid
+
 
 // PREDICATES
 
-pred show(){
-	#Passenger > 1
-	#Ride > 1
-	#TaxiDriver > 1
+
+pred showNormalRequest(){
+	#Passenger =1
+	#Ride = 1
+	#TaxiDriver = 1
 }
 
-run show for 4
+//run showNormalRequest for 3
+
+pred show(){
+	#Passenger >= 2
+	#Ride >= 2
+	#TaxiDriver >= 2
+    #{x: Ride| #x.requests>1} >=1
+	#{x: RideRequest | x.isShared = True} > 1
+}
+
+run show for 10
+
