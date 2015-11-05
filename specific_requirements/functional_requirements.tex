@@ -19,6 +19,9 @@ If any of the previous requirements are not met or any input is invalid, the reg
 \begin{center}
 	\includegraphics[height=\textwidth]{diagrams/registration}
 \end{center}
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/registration_state}
+\end{center}
 
 \paragraph{Functional Requirements}
 \begin{itemize}
@@ -65,23 +68,24 @@ In case a user forgets his/her password, the system allows him/her to retrieve i
 \begin{center}
 	\includegraphics[height=\textwidth]{diagrams/login}
 \end{center}
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/login_state}
+\end{center}
 \paragraph{Functional Requirements}
 
 \subsection{Standard ride request}
-
 \paragraph{Purpose}
-
 Passenger users can request a taxi both through the web or through the mobile application, giving only simple data about the number of passengers and sharing preferences (in case of shared ride, see also ?.?.?, "Shared Ride Request").\\
 In any case, the system will then care about keeping the user informed about all details of his request, i.e. status of the request, estimated time of arrival (ETA) of the incoming taxi, in addition to its taxi code.
-
 \paragraph{Scenarios}
 \begin{enumerate}
 	\item Elsa wanted to take the bus, but the heavy snow that fell in the last three days caused a lot of traffic problems. Fortunately for her, the taxi service is still functioning, so she opens myTaxiService on her mobile phone, logs in, and chooses "Request".
 	She uses the GPS info to fill the "Origin" field, leaves the "Share" checkbox blank, then "Confirm". In a matter of minutes Frank, a taxi driver in her zone, accepts her request: Elsa is informed that she has to wait approximately 6 minutes for her taxi, encoded 288, to arrive. In the meanwhile, the system give her updates about the taxi position. At the expected time Frank arrives, picks Elsa up and carries her to desired destination.
 \end{enumerate}
-
 \paragraph{Diagrams}
-
+\begin{center}
+	\includegraphics[height=\textwidth]{diagrams/standard_request}
+\end{center}
 \paragraph{Functional Requirements}
 \begin{itemize}
 	
@@ -124,6 +128,10 @@ In any case, the system will then care about sending a taxi to the given locatio
 
 \paragraph{Diagrams}
 
+\begin{center}
+	\includegraphics[height=\textwidth]{diagrams/reserved_request}
+\end{center}
+
 \paragraph{Functional Requirements}
 
 \subsection{Shared ride request}
@@ -160,7 +168,9 @@ Albert is a taxi driver subscribed to myTaxiService. He logs in through his mobi
 A few hours later, Albert finishes his worktime and logs off. The system sets his status to "Offline" and removes him from any queue.
 
 \paragraph{Diagrams}
-
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/availability}
+\end{center}
 \paragraph{Functional Requirements}
 \begin{itemize}
 	
@@ -195,5 +205,7 @@ The system allows registered users to view and modify their profiles at any mome
 Alex uses to periodically change his account password, in order to increase protection. To do so, every 3 months, he opens myTaxiService on his mobile phone, chooses "Profile", then "Modify". He selects the password field, writes down a new one, then writes it again in the "Confirm password" field. Finally, he clicks "Confirm": the system informs him that his account password has succesfully been updated.
 
 \paragraph{Diagrams}
-
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/account_settings}
+\end{center}
 \paragraph{Functional Requirements}

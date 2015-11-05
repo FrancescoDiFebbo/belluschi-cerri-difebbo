@@ -56,13 +56,9 @@ Notification that the passenger see when a taxi accept the ride
 	\includegraphics[width=\textwidth]{mockup/PassengerNotification.pdf}
 \end{center}
 
-\subsection{API interfaces}
-MyTaxiService uses Google Maps APIs in order to show to the passengers and to the taxi driver their position in the city.
-This API is continuos update and works for all the OS and browsers web supported by MyTaxiService.
-More information are available on the site: https://developers.google.com/maps/
-
 \subsection{Hardware interfaces}
-MyTaxiService doesn't support any hardware interfaces.	\subsection{Software interfaces}
+myTaxiService must have access to GPS of taxi driver's phones. GPS on passenger devices is not required.
+\subsection{Software interfaces}
 \begin{itemize}
 	\item Database Management System (DBMS): \newline
 	Name: MySQL \newline
@@ -70,12 +66,15 @@ MyTaxiService doesn't support any hardware interfaces.	\subsection{Software inte
 	Source: http://www.mysql.it/ 
 	\item Java Virtual Machine (JVM):\newline
 	Name: JEE \newline
-	Version: 7 \newline
+	Version: 8 \newline
 	Source: http://www.oracle.com/technetwork/java/javaee/tech/index.html
 	\item Application server: \newline
 	Name: Glassfish \newline
 	Version: 4.1.1 \newline
 	Source: https://glassfish.java.net/
+	\item myTaxiService uses Google Maps APIs in order to show to the passengers and to the taxi driver their position in the city.
+	This API is continuously update and works for all the OS and browsers web supported by myTaxiService.
+	More information are available on the site: https://developers.google.com/maps/
 \end{itemize}
 \subsection{Communication interfaces}
 \begin{itemize}
