@@ -17,18 +17,15 @@ If any of the previous requirements are not met or any input is invalid, the reg
 \paragraph{Diagrams}
 
 \begin{center}
-	\includegraphics[width=\textwidth]{diagrams/registration}
+	\includegraphics[height=\textwidth]{diagrams/registration}
 \end{center}
 
 \paragraph{Functional Requirements}
 \begin{itemize}
 	
-	\item Visitors can register either as passengers or as taxi drivers.
-	
-	\item Visitors can abort the registration process at any time.
-	
-	\item The link in the confirmation email must be clicked within 1 day, otherwise the registration is deleted along with the visitor's info.
-	
+	\item Visitors can register either as passengers or as taxi drivers.	
+	\item Visitors can abort the registration process at any time.	
+	\item The link in the confirmation email must be clicked within 1 day, otherwise the registration is deleted along with the visitor's info.	
 	\item Registration forms contain the following info (fields):
 	\begin{itemize}
 		\item email address
@@ -45,14 +42,10 @@ If any of the previous requirements are not met or any input is invalid, the reg
 	\end{itemize}
 	All fields must be contain valid inputs.\\
 	Fields marked with (*) are not mandatory.\\
-	Fields marked with (**) are only for taxi driver registrations.
-	
-	\item email address and username cannot be the same as ones from other myTaxiService users.
-	
-	\item password must contain at least 8 characters.
-	
-	\item password and password confirmation must match.
-	
+	Fields marked with (**) are only for taxi driver registrations.	
+	\item email address and username cannot be the same as ones from other myTaxiService users.	
+	\item password must contain at least 8 characters.	
+	\item password and password confirmation must match.	
 \end{itemize}
 
 \subsection{Login}
@@ -69,7 +62,9 @@ In case a user forgets his/her password, the system allows him/her to retrieve i
 \end{enumerate}
 
 \paragraph{Diagrams}
-
+\begin{center}
+	\includegraphics[height=\textwidth]{diagrams/login}
+\end{center}
 \paragraph{Functional Requirements}
 
 \subsection{Standard ride request}
