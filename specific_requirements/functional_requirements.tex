@@ -125,12 +125,53 @@ In any case, the system will then care about sending a taxi to the given locatio
 \paragraph{Diagrams}
 
 \paragraph{Functional Requirements}
+\begin{itemize}
+
+	\item The system allows reserved taxi ride requests to passenger users.
+	
+	\item The system allows reserved taxi ride requests if and only if the passenger gives definite positions of some definite taxi zones both for "Origin" and "Destination" fields.
+	
+	\item The system allows passengers to select locations either through GPS or directly writing down a valid location.
+	
+	\item The system allows reserved taxi ride requests if and only if the passenger gives complete info about the date and the time of the meeting.
+	
+	\item The system allows reserved taxi ride requests if and only if the time of the request occurs at least two hours before the ride meeting time.
+	
+	\item The system forwards notifications to taxi drivers about reserved taxi ride requests 10 minutes before the ride meeting time.
+	
+	\item The system uses default values for the number of passengers and sharing preferences of a reserved ride (1 person, no sharing), unless the passenger does specify them.
+	
+	\item The system uses a FIFO policy to manage forwarding of pending ride requests.
+	
+	\item The system uses a FIFO policy to manage the order of taxi drivers in queues to send notifications to.
+	
+	\item The system forwards a reserved ride request to the first taxi driver in the considered zone queue if and only if he/she has a sufficient number of free seats available in his/her vehicle.
+	
+	\item Once a reserved ride request has been accepted by some taxi driver, the system changes the request status from "Pending" to "Accepted".
+	
+	\item Once a reserved ride request has been accepted by some taxi driver, the system calculates the ETA of the incoming taxi based on the distance between the taxi and the passenger(s), and the current traffic.
+	
+	\item Once a reserved ride request has been accepted by some taxi driver, the system notifies the passenger(s) about the ETA of the incoming taxi.
+	
+	\item Once a reserved ride request has been accepted by some taxi driver, the system keeps the passenger(s) notified about the current location of the incoming taxi, showing its position on a map.
+	
+	\item Once a reserved ride request has been accepted by some taxi driver, the system prevents the passenger(s) to make a new ride request until the taxi driver changes the status of the ride to "Completed".
+\end{itemize}
 
 \subsection{Shared ride request}
 
 \paragraph{Purpose}
-
+	All ride requests can be shared with other passengers, in order to divide the cost of the ride. To do so, while subscribing a ride request, passenger users may specify their preference to share the ride, besides submitting a valid destination (if not already present).\\
+		At the time of forwarding the request to taxi drivers, the system will use an appropriate algorythm to try to identify other ride requests with the same origin and a similar direction. The result will be an arrangement of those rides requests, taking into account the total number of seats necessary and calculating the optimal route to reach each destination in the least total time. The system will then proceed to forward the grouped requests as normal. In case a grouped request is not accepted, or continuously refused, for 3 minutes, the system proceeds to split the group and try to find new arrangements.\\
+		When a grouped request is succesfully accepted by some taxi driver, the system will take care of splitting the taxi fee among all passengers, proportionally to the distance traveled by each one.
+		
 \paragraph{Scenarios}
+\begin{itemize}
+	\item Jack and his friend Kevin want to go home after a party. They drank a bit too much, and Jack doesn't feel sober enough to drive. Therefore, he opens myTaxiService mobile application, logs in as a passenger user, and chooses "Request". Jack and Kevin don't have much money left, though, so Jack decides to share the ride. He ticks the "Share" checkbox, writes down his address as "Destination", then selects "Confirm". After a while Lara, who was at the same party and lives between Jack and her current position, sends a similar shared ride request, with destination her home. The system arrange the two requests in the same taxi. A minute after, Mark, a taxi driver, accepts the grouped request, and comes to pick up the three. He brings Lara home first, making her pay one third of the traveled distance. Then, Mark proceeds to Jack's home, and upon arrival makes Jack and Kevin pay the remaining cost of the ride. They decide to each pay half the fee.
+	
+	\item Neil has bought a ticket to the finals of his favourite team. Considering that during the day of the match it's almost impossible to find parking near the stadium, he decides go there by taxi. On his computer, he access the homepage of myTaxiService web application, logs in as a passenger user, then clicks "Reserve". He chooses an hour before the beginning of the match as Date and Time, ticks "Share" checkbox, selects his home as "Origin" and the stadium as "Destination" from the maps, then "Confirm". The system informs him that the request is successful. The system verifies the existence of other suitable shared ride requests to group Neil's one with, but doesn't find anything.\\
+The day of the match Oliver, another fan who lives in the same street of Neil, jumps to his same conclusion. A bit more than an hour before the match, he requests a shared ride from home to the stadium. Fortunately for him, no request was made that was eligible to be grouped with Neil's, so the system proceeds to group them. After a few minutes, Petra accepts Neil and Oliver grouped request, and comes to pick them up. Upon arrival, they split the ride fee equally.
+\end{itemize}
 
 \paragraph{Diagrams}
 
@@ -140,7 +181,17 @@ In any case, the system will then care about sending a taxi to the given locatio
 
 \paragraph{Purpose}
 
+	Taxi driver users, if logged in on the myTaxiService mobile application and not busy, are able to receive notifications about pending ride requests. They then become able to respond to them, either accepting or refusing.\\
+		The system manages taxis assigning each taxi driver to the queue of his/her corresponding taxi zone. Every request notification from a certain zone is forwarded to the first eligible taxi driver of that taxi zone queue. If that first taxi driver accepts it, the request becomes accepted and the taxi driver status changes to "Busy": he/she is removed from the queue. He/she will be put back on the bottom of the queue as soon as he notifies the system that he's finished the ride and his/her status changes back to "Ready".\\
+		If the first taxi driver refuses instead, the request is forwarded to the second taxi driver; the same goes for the third, the fourth and so on. Either way, taxi drivers that refuse a request end on the bottom of their taxi zone queue. Finally, taxi drivers must respond to each request within one minute from its forwarding, otherwise the system will automatically take it as a refusal.
+
 \paragraph{Scenarios}
+\begin{itemize}
+	\item Pamela is a taxi driver. She's a few minutes from ending her workshift before launchbreak, when suddenly a new request notification arrives on the myTaxiService application on her mobile phone. The request comes from passenger user Qasim. Pamela can see his position on the map. He's pretty far from her current position, so she decides to refuse and end her workshift. The system changes her status to "Offline".\\
+Qasim's request is instead forwarded to the next taxi driver user in the same zone queue, Rebecca. She decides to accept the request, thus changing her status from "Ready" to "Busy" and leaving the taxi zone queue. Qasim is notified that his request has been accepted. Rebecca goes to pick him up and brings him to his destination.
+	
+	\item Simon is a taxi driver user. It's late in the night and he's really tired: without noticing, he dozes off. Not long after, a notification arrives on his mobile phone. It's a shared request from passenger users Thomas and Ursula. Unfortunately, Simon doesn't notice it: one minute passes and the system automatically take it as a refusal. The grouped request is forwarded to taxi driver Violet, who decides to accept it: the system removes her from the queue and changes her status to "Busy". Thomas and Ursula are both notified that they're request have succesfully been accepted, and that Violet is on her way to them. Some minutes after, Violet arrives and bring them to their destination, splitting the fee according to the system indications.
+\end{itemize}
 
 \paragraph{Diagrams}
 
@@ -156,8 +207,7 @@ Similarly, when the ride is over, the taxi driver has to notify the system that 
 Finally, when the taxi driver finishes his workshift, he may inform the system, or simply log off. In both cases, his/her status automatically switches to "Offline".
 
 \paragraph{Scenarios}
-Albert is a taxi driver subscribed to myTaxiService. He logs in through his mobile phone and his status changes from "Offline" to "Ready". The system receives info from the GPS and puts Albert on the bottom of the taxi zone he's currently in. After a while, his phone notifies him about a new ride request: he decides to accept it and his status changes to "Busy". He's no longer in the taxi queue. Albert goes to the start location, picks up Barbara and takes her to her destination. When they arrive, Albert informs the system that he has concluded the ride: his status changes to "Ready". The system puts him on the bottom of his current taxi zone queue. Later on, he receives another ride requests, but this time he decides to refuse it: its status remains unchanged as "Ready", but he loses all his positions in the queue.
-A few hours later, Albert finishes his worktime and logs off. The system sets his status to "Offline" and removes him from any queue.
+William is a taxi driver subscribed to myTaxiService. He logs in through his mobile phone and his status changes from "Offline" to "Ready". The system receives info from the GPS and puts William on the bottom of the taxi zone he's currently in. After a while, his phone notifies him about a new ride request: it's from passenger user Xenia. William decides to accept it and his status changes to "Busy". He's no longer in the taxi queue. William goes to the start location, picks up Xenia and takes her to her destination. When they arrive, William informs the system that he has concluded the ride: his status changes to "Ready". The system puts him on the bottom of his current taxi zone queue. Later on, he receives another ride requests, but this time he decides to refuse it: its status remains unchanged as "Ready", but he loses all his positions in the queue. A few hours later, William finishes his worktime and logs off. The system sets his status to "Offline" and removes him from any queue.
 
 \paragraph{Diagrams}
 
@@ -192,7 +242,7 @@ A few hours later, Albert finishes his worktime and logs off. The system sets hi
 The system allows registered users to view and modify their profiles at any moment, as long as they're logged in. Usernames cannot be modified, while modified email addresses, taxi license IDs and taxi codes must not match with the ones of other users, otherwise the system denies the modification request. In case of modified email address, the system sends a confirmation email to the new address. Modification will succesfully ends when the user clicks the link in the sent email. 
 
 \paragraph{Scenarios}
-Alex uses to periodically change his account password, in order to increase protection. To do so, every 3 months, he opens myTaxiService on his mobile phone, chooses "Profile", then "Modify". He selects the password field, writes down a new one, then writes it again in the "Confirm password" field. Finally, he clicks "Confirm": the system informs him that his account password has succesfully been updated.
+Zac uses to periodically change his account password, in order to increase protection. To do so, every 3 months, he opens myTaxiService on his mobile phone, chooses "Profile", then "Modify". He selects the password field, writes down a new one, then writes it again in the "Confirm password" field. Finally, he clicks "Confirm": the system informs him that his account password has succesfully been updated.
 
 \paragraph{Diagrams}
 
