@@ -69,6 +69,7 @@ sig Ride {
 	#requests > 0
 	startDate > 0
 	startDate < endDate
+	startPosition!=endPosition
 	numOfPassengers <= taxiDriver.numberOfSeats
 	#passengers <= numOfPassengers
 	#endDate=0 iff status= ONGOING
@@ -94,7 +95,7 @@ sig RideRequest{
 }
 {
 	endPosition != startPosition
-    #endPosition=0 iff isShared = False
+    isShared = False implies #endPosition= 0
 	(#ride=0 or #taxiDriver=0) iff status = PENDING
 	(#ride=1 and #taxiDriver=1) iff status = ACCEPTED
 	requestDate>0
@@ -105,7 +106,7 @@ sig ReserveRideRequest extends RideRequest{
 	startDate: one Int
 }
 {
-	startDate >0
+	#endPosition=1
 }
 	
 sig TaxiZone{
@@ -148,7 +149,7 @@ fact TaxiDriverInOnlyOneQueue {
 }
 //a taxi must be BUSY during the time of the ride
 fact BusyDuringRide {
-	all t: TaxiDriver, r: Ride| (r.taxiDriver = t and r.status = ONGOING)
+	all t: TaxiDriver, r: Ride| (r.taxiDriver = t and #endDate=0)
 		implies (t.status= BUSY)
 }
 
@@ -164,9 +165,9 @@ fact noTaxiDriverOverlapRide {
 		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
 
-//a Ride cointains only ACCEPTED ride request
+// only ACCEPTED Ride Request can have a Ride
 fact RideWithOnlyAcceptedRideRequest{
-	all r: Ride, rr: r.requests| rr.status = ACCEPTED and rr.ride = r
+	all r: Ride, rr: r.requests| rr.ride = r and rr.status = ACCEPTED  
 }
 
 //a Ride Request cannot be in two different Ride 
@@ -182,17 +183,12 @@ fact RideWithRequestsSharing {
 
 //if a ride refer to a ride request the taxi driver must be the same
 fact taxiDriverUniqueRideReferRideRequest {
-	all rr: RideRequest | rr.ride.taxiDriver = rr.taxiDriver
+	all rr: RideRequest | rr.ride.taxiDriver = rr.taxiDriver 
 }
 
 //if a ride refer to a ride request the passenger of the Ride Request must be in the passenger of the Ride
 fact taxiDriverUniqueRideReferRideRequest {
-	all rr: RideRequest | rr.passenger in rr.ride.passengers
-}
-
-//the number of passengers in a Ride in the same of the sum of the passenger of the Ride Request asssociated
-fact passengersSumEqualToAssociatedRideRequests{
-	all r: Ride | r.numOfPassengers =   r.requests.numberOfPassengers
+	all rr: RideRequest , r:Ride|  rr.ride = r implies rr.passenger in r.passengers
 }
 
 //a passenger cannot take another request when is in a ongoing ride
@@ -201,9 +197,15 @@ fact noPassengerOverlapRideRequest {
 		implies (r1.ride.endDate < r2.ride.startDate or r2.ride.endDate < r1.ride.startDate)
 }
 
-//the reserve date of a request must be before the start date of a ride
+//the request date of a request ride must be before the start date of a ride 
 fact reserveDateBeforeRide{
-	all r: ReserveRideRequest | r.startDate<r.ride.startDate
+	all r: RideRequest | r.requestDate<r.ride.startDate
+}
+
+
+//the reserve date of a reserve ride must be before the start date of a ride and after the request date
+fact reserveDateBeforeRide{
+	all r: ReserveRideRequest | r.startDate<r.ride.startDate and r.startDate>r.requestDate
 }
 
 
@@ -214,7 +216,7 @@ assert TaxiDriverInOneQueue {
 	all t: TaxiDriver | (lone q: Queue | t in q.taxiDrivers)
 }
 
-//check TaxiDriverInOneQueue 
+check TaxiDriverInOneQueue 
 //No counterexample found. Assertion may be valid
 
 //No another ride if the taxi driver is busy
@@ -223,7 +225,7 @@ assert noAnotherRideIfTaxiDriverBusy {
 		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
 
-//check noAnotherRideIfTaxiDriverBusy
+check noAnotherRideIfTaxiDriverBusy
 //No counterexample found. Assertion may be valid
 
 //No another ride if the passenger is going in another ride
@@ -231,7 +233,7 @@ assert noAnotherRideIfPassengerIsGoingInAnotherRide {
 	all  r1, r2: Ride | (r1.passengers=r2.passengers and r1 != r2)
 			implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
-//check noAnotherRideIfPassengerIsGoingInAnotherRide
+check noAnotherRideIfPassengerIsGoingInAnotherRide
 //No counterexample found. Assertion may be valid
 
 
@@ -244,7 +246,7 @@ pred showNormalRequest(){
 	#TaxiDriver = 1
 }
 
-//run showNormalRequest for 3
+run showNormalRequest for 3
 
 pred show(){
 	#Passenger >= 2
@@ -254,5 +256,5 @@ pred show(){
 	#{x: RideRequest | x.isShared = True} > 1
 }
 
-run show for 10
+run show for 4
 
