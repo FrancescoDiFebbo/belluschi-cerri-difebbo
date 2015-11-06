@@ -1,11 +1,12 @@
 // ALLOY CODE FOR MYTAXSERVICE
-module MyTaxiService
-// Defines Bool, True, False
+
+// This util defines True or False boolean
 open util/boolean
 
 // Dates are expressed as the number of seconds from 1970-01-01 
 
 //SIGNATURES
+
 sig Strings{}
 
 abstract sig User {
@@ -24,11 +25,11 @@ sig Passenger extends User{
 }
 
 sig TaxiDriver extends User{
-licenseID: one Int, 
-taxiPlateNumber: one Strings,
-taxiCode: one Int,
-numberOfSeats: one Int,
-status: one TaxiDriverStatus
+	licenseID: one Int, 
+	taxiPlateNumber: one Strings,
+	taxiCode: one Int,
+	numberOfSeats: one Int,
+	status: one TaxiDriverStatus
 }
 {
 	taxiCode > 0
@@ -124,18 +125,12 @@ sig Queue {
 
 // users must not have same username or same e-mail
 fact UniqueUser{
-no u1, u2: User | (u1 != u2 and (u1.username = u2.username or u1.email = u2.email))
+	no u1, u2: User | (u1 != u2 and (u1.username = u2.username or u1.email = u2.email))
 }
 
 // taxi drivers must not have same licenseID or same taxiCode
 fact UniqueTaxiDriver{
-no t1, t2: TaxiDriver | (t1 != t2 and (t1.licenseID = t2.licenseID or t1.taxiCode=t2.taxiCode))
-}
-
-//zones must not have same zoneId
-fact UniqueTaxiZone {
-	no z1, z2: TaxiZone |( z1 != z2 and z1.zoneId = z2.zoneId)
-	queue = ~zone
+	no t1, t2: TaxiDriver | (t1 != t2 and (t1.licenseID = t2.licenseID or t1.taxiCode=t2.taxiCode))
 }
 
 //if a taxi driver has the status READY, he/she has to put into some queues
@@ -151,6 +146,12 @@ fact TaxiDriverInOnlyOneQueue {
 fact BusyDuringRide {
 	all t: TaxiDriver, r: Ride| (r.taxiDriver = t and #endDate=0)
 		implies (t.status= BUSY)
+}
+
+//zones must not have same zoneId
+fact UniqueTaxiZone {
+	no z1, z2: TaxiZone |( z1 != z2 and z1.zoneId = z2.zoneId)
+	queue = ~zone
 }
 
 //a passenger cannot take two ride at the same time
@@ -175,20 +176,30 @@ fact RideWithOnlyAcceptedRideRequest{
 	 no  r1,r2 :Ride | r1!=r2 and (r1.requests=r2.requests)
 }
 
-//A ride that has more than one RideRequest must have only RideRequest shared
+//A ride that has more than one RideRequest must have all RideRequest shared
 fact RideWithRequestsSharing {
 	all r: Ride| (#r.requests>1)
 		iff (all rr:r.requests|(rr.isShared = True ))
 }
 
-//if a ride refer to a ride request the taxi driver must be the same
-fact taxiDriverUniqueRideReferRideRequest {
+//if a ride refers to a ride request the taxi driver must be the same
+fact taxiDriverUniqueRideRefersRideRequest {
 	all rr: RideRequest | rr.ride.taxiDriver = rr.taxiDriver 
 }
 
-//if a ride refer to a ride request the passenger of the Ride Request must be in the passenger of the Ride
-fact taxiDriverUniqueRideReferRideRequest {
+//if a ride refers to a ride request the passenger of the Ride Request must be in the passenger of the Ride
+fact passengersUniqueRideRefersRideRequest {
 	all rr: RideRequest , r:Ride|  rr.ride = r implies rr.passenger in r.passengers
+}
+
+//if a ride refers to a ride request the start destination must be the same
+fact destinationUniqueRideRefersRideRequest {
+	all rr: RideRequest , r:Ride|  rr.ride = r implies rr.startPosition = r.startPosition
+}
+
+//the number of passengers in the request refers to the corrispondent ride must be the same
+fact correspondentNumberOfPassengers {
+	all rr: RideRequest , r:Ride|  rr.ride = r implies rr.ride.numOfPassengers = sum ( r.requests.numberOfPassengers)
 }
 
 //a passenger cannot take another request when is in a ongoing ride
@@ -198,7 +209,7 @@ fact noPassengerOverlapRideRequest {
 }
 
 //the request date of a request ride must be before the start date of a ride 
-fact reserveDateBeforeRide{
+fact requestDateBeforeRide{
 	all r: RideRequest | r.requestDate<r.ride.startDate
 }
 
@@ -216,7 +227,7 @@ assert TaxiDriverInOneQueue {
 	all t: TaxiDriver | (lone q: Queue | t in q.taxiDrivers)
 }
 
-check TaxiDriverInOneQueue 
+//check TaxiDriverInOneQueue 
 //No counterexample found. Assertion may be valid
 
 //No another ride if the taxi driver is busy
@@ -225,7 +236,7 @@ assert noAnotherRideIfTaxiDriverBusy {
 		implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
 
-check noAnotherRideIfTaxiDriverBusy
+//check noAnotherRideIfTaxiDriverBusy
 //No counterexample found. Assertion may be valid
 
 //No another ride if the passenger is going in another ride
@@ -233,7 +244,7 @@ assert noAnotherRideIfPassengerIsGoingInAnotherRide {
 	all  r1, r2: Ride | (r1.passengers=r2.passengers and r1 != r2)
 			implies (r1.endDate < r2.startDate or r2.endDate < r1.startDate)
 }
-check noAnotherRideIfPassengerIsGoingInAnotherRide
+//check noAnotherRideIfPassengerIsGoingInAnotherRide
 //No counterexample found. Assertion may be valid
 
 
