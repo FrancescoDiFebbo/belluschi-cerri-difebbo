@@ -16,6 +16,7 @@
 \paragraph{Diagrams}
 	\begin{center}
 		\includegraphics[width=\textwidth]{diagrams/registration}
+		
 	\end{center}
 	\begin{center}
 		\includegraphics[width=\textwidth]{diagrams/registration_state}
@@ -161,7 +162,7 @@
 	\paragraph{Purpose}
 		All ride requests can be shared with other passengers, in order to divide the cost of the ride. To do so, while subscribing a ride request, passenger users may specify their preference to share the ride, besides submitting a valid destination (if not already present).\\
 		At the time of forwarding the request to taxi drivers, the system will use an appropriate algorythm to try to identify other ride requests with the same origin and a similar direction. The result will be an arrangement of those rides requests, taking into account the total number of seats necessary and calculating the optimal route to reach each destination in the least total time. The system will then proceed to forward the grouped requests as normal. In case a grouped request is not accepted, or continuously refused, for 3 minutes, the system proceeds to split the group and try to find new arrangements.\\
-		When a grouped request is succesfully accepted by some taxi driver, the system will take care of splitting the taxi fee among all passengers, proportionally to the distance traveled by each one.
+		When a grouped request is successfully accepted by some taxi driver, the system will take care of splitting the taxi fee among all passengers, proportionally to the distance traveled by each one.
 	
 	\paragraph{Scenarios}
 		\begin{itemize}
@@ -173,7 +174,10 @@
 	
 	\paragraph{Diagrams}
 	\begin{center}
-	\includegraphics[height=\textwidth]{diagrams/shared_request}
+	\includegraphics[width=\textwidth]{diagrams/shared_request}
+\end{center}
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/shared_state}
 \end{center}
 	
 	\paragraph{Functional Requirements}
@@ -209,12 +213,15 @@
 			\item Pamela is a taxi driver. She's a few minutes from ending her workshift before launchbreak, when suddenly a new request notification arrives on the myTaxiService application on her mobile phone. The request comes from passenger user Qasim. Pamela can see his position on the map. He's pretty far from her current position, so she decides to refuse and end her workshift. The system changes her status to "Offline".\\
 			Qasim's request is instead forwarded to the next taxi driver user in the same zone queue, Rebecca. She decides to accept the request, thus changing her status from "Ready" to "Busy" and leaving the taxi zone queue. Qasim is notified that his request has been accepted. Rebecca goes to pick him up and brings him to his destination.
 			
-			\item Simon is a taxi driver user. It's late in the night and he's really tired: without noticing, he dozes off. Not long after, a notification arrives on his mobile phone. It's a shared request from passenger users Thomas and Ursula. Unfortunately, Simon doesn't notice it: one minute passes and the system automatically take it as a refusal. The grouped request is forwarded to taxi driver Violet, who decides to accept it: the system removes her from the queue and changes her status to "Busy". Thomas and Ursula are both notified that they're request have succesfully been accepted, and that Violet is on her way to them. Some minutes after, Violet arrives and bring them to their destination, splitting the fee according to the system indications.
+			\item Simon is a taxi driver user. It's late in the night and he's really tired: without noticing, he dozes off. Not long after, a notification arrives on his mobile phone. It's a shared request from passenger users Thomas and Ursula. Unfortunately, Simon doesn't notice it: one minute passes and the system automatically take it as a refusal. The grouped request is forwarded to taxi driver Violet, who decides to accept it: the system removes her from the queue and changes her status to "Busy". Thomas and Ursula are both notified that they're request have successfully been accepted, and that Violet is on her way to them. Some minutes after, Violet arrives and bring them to their destination, splitting the fee according to the system indications.
 		\end{itemize}
 		
 	\paragraph{Diagrams}
 	\begin{center}
 	\includegraphics[width=\textwidth]{diagrams/notification}
+\end{center}
+\begin{center}
+	\includegraphics[width=\textwidth]{diagrams/request_state}
 \end{center}
 	
 	\paragraph{Functional Requirements}
@@ -250,6 +257,9 @@
 		\begin{center}
 			\includegraphics[width=\textwidth]{diagrams/availability}
 		\end{center}
+		\begin{center}
+			\includegraphics[width=\textwidth]{diagrams/availability_state}
+		\end{center}
 		
 	\paragraph{Functional Requirements}
 		\begin{itemize}
@@ -267,17 +277,20 @@
 
 \subsection{Account settings}
 	\paragraph{Purpose}
-		The system allows registered users to view and modify their profiles at any moment, as long as they're logged in. Usernames cannot be modified, while modified email addresses, taxi license IDs and taxi codes must not match with the ones of other users, otherwise the system denies the modification request. In case of modified email address, the system sends a confirmation email to the new address. Modification will succesfully ends when the user clicks the link in the sent email.
+		The system allows registered users to view and modify their profiles at any moment, as long as they're logged in. Usernames cannot be modified, while modified email addresses, taxi license IDs and taxi codes must not match with the ones of other users, otherwise the system denies the modification request. In case of modified email address, the system sends a confirmation email to the new address. Modification will successfully ends when the user clicks the link in the sent email.
 	
 	\paragraph{Scenarios}
 		\begin{itemize}
-			\item Zac uses to periodically change his account password, in order to increase protection. To do so, every 3 months, he opens myTaxiService on his mobile phone, chooses "Profile", then "Modify". He selects the password field, writes down a new one, then writes it again in the "Confirm password" field. Finally, he clicks "Confirm": the system informs him that his account password has succesfully been updated.
+			\item Zac uses to periodically change his account password, in order to increase protection. To do so, every 3 months, he opens myTaxiService on his mobile phone, chooses "Profile", then "Modify". He selects the password field, writes down a new one, then writes it again in the "Confirm password" field. Finally, he clicks "Confirm": the system informs him that his account password has successfully been updated.
 		\end{itemize}
 	
 	\paragraph{Diagrams}
 		\begin{center}
 			\includegraphics[width=\textwidth]{diagrams/account_settings}
 		\end{center}
+			\begin{center}
+				\includegraphics[width=\textwidth]{diagrams/settings}
+			\end{center}
 	
 	\paragraph{Functional Requirements}
 		\begin{itemize}
