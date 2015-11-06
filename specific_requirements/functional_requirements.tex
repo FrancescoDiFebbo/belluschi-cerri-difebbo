@@ -122,7 +122,7 @@
 \subsection{Reserved ride request}
 	\paragraph{Purpose}
 		Passenger users can request to reserve a taxi for some definite future ride. The operation can be done both through the web or through the mobile application, and requires information about the location and exact date and time of the meeting point, the destination, the number of passengers and the sharing preferences (in case of shared ride, see also 3.2.5, "Shared Ride Request").\\
-		In any case, the system will then care about sending a taxi to the given location at the given date and time. Reservation requests must occur at least two hours before the ride meeting time.
+		In any case, the system will take care about forwarding a taxi ride request to taxi drivers exactly 10 minutes before the agreed date and time. Reservation requests must occur at least two hours before the ride meeting time.
 	
 	\paragraph{Scenarios}
 		\begin{enumerate}
@@ -184,7 +184,7 @@
 		\begin{itemize}
 			\item The system allows taxi ride sharing to passenger users.
 			\item The system allows taxi ride sharing both on the web and on the mobile application.
-			\item The system allows both standard shared taxi ride requests and reserved shared taxi ride requests, simply ticking the "Share" checkbox while doing any standard or reserved request.
+			\item The system allows both standard shared taxi ride requests and reserved shared taxi ride requests, simply ticking the "Share" checkbox while doing any any kind of taxi ride request.
 			\item Both kinds of shared ride requests require no less data than their non-shared forms (see also 3.2.3, "Standard ride request" and 3.2.4, "Reserved ride request").
 			\item The system allows standard shared taxi ride requests if and only if the passenger also gives a definite existing position of some definite existing taxi zone as "Destination" (reserved taxi ride requests already require this, even if non-shared).
 			\item The system allows passengers to select the input for "Destination" either through GPS or directly writing down a valid location.
