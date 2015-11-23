@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.2">
+  <zoom_level>5</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>115</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Homepage $
+--
+
+--
+_navigateTo()_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>85</x>
+      <y>255</y>
+      <w>65</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>110.0;10.0;110.0;40.0;10.0;40.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>40</x>
+      <y>295</y>
+      <w>95</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Passenger Registration
+--
++ name: String
++ surname : String
++ address : String
++ username : String
++ password : String
++ e-mail : String
++ telephoneNumber : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>345</x>
+      <y>165</y>
+      <w>15</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>195</y>
+      <w>95</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Login
+--
+username : String
+password : String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>275</y>
+      <w>95</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+User Home $
+--
+
+--
+_navigateTo()_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>345</x>
+      <y>240</y>
+      <w>20</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ok</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>395</x>
+      <y>140</y>
+      <w>50</w>
+      <h>95</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+error</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>205</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Registration
+--
+
+--
+_navigateTo()_
+submit()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>115</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Login
+--
+
+--
+_navigateTo()_
+submit()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>135</y>
+      <w>135</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-&gt;&gt;&gt;&gt;
+</panel_attributes>
+    <additional_attributes>250.0;20.0;10.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>165</y>
+      <w>15</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-&gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>0</x>
+      <y>160</y>
+      <w>100</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ok</panel_attributes>
+    <additional_attributes>180.0;10.0;10.0;10.0;10.0;520.0;180.0;520.0;180.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>145</x>
+      <y>295</y>
+      <w>95</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Taxi Driver Registration
+--
++ name: String
++ surname : String
++ address : String
++ username : String
++ password : String
++ e-mail : String
++ telephoneNumber : String
++ licenseID : String
++ taxiPlateNumber : String
++ numberOfSeats : Integer</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>135</x>
+      <y>255</y>
+      <w>70</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;40.0;120.0;40.0;120.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>230</y>
+      <w>100</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+error</panel_attributes>
+    <additional_attributes>10.0;10.0;150.0;10.0;150.0;210.0;120.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>180</x>
+      <y>160</y>
+      <w>115</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ok</panel_attributes>
+    <additional_attributes>10.0;10.0;200.0;10.0;200.0;520.0;30.0;520.0;30.0;490.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>20</x>
+      <y>230</y>
+      <w>80</w>
+      <h>115</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+error</panel_attributes>
+    <additional_attributes>140.0;10.0;10.0;10.0;10.0;210.0;40.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>210</y>
+      <w>95</w>
+      <h>55</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Passenger Home
+--
+
+--
+_navigateTo()_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>455</x>
+      <y>290</y>
+      <w>95</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Taxi Driver Home
+--
+
+--
+_navigateTo()_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>395</x>
+      <y>230</y>
+      <w>70</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;80.0;140.0;80.0;10.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>395</x>
+      <y>295</y>
+      <w>70</w>
+      <h>30</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;40.0;120.0;40.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>345</x>
+      <y>320</y>
+      <w>15</w>
+      <h>45</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>305</x>
+      <y>355</y>
+      <w>95</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Profile
+--
+
+--
+_navigateTo()_
+viewProfile()
+modifyProfile()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>545</x>
+      <y>175</y>
+      <w>65</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;120.0;50.0;120.0;50.0;10.0;110.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>155</y>
+      <w>95</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Request Taxi
+--
+
+--
+_navigateTo()_
+request()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>545</x>
+      <y>230</y>
+      <w>65</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;50.0;10.0;50.0;100.0;110.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>600</x>
+      <y>255</y>
+      <w>95</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Reserve Taxi
+--
+
+--
+_navigateTo()_
+reserve()
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>725</x>
+      <y>155</y>
+      <w>115</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Request Taxi
+--
++startPosition : Position
++numberOfPassengers : Integer
++shared : Boolean
++destination : Position
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>725</x>
+      <y>255</y>
+      <w>115</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Reserve Taxi
+--
++startPosition : Position
++destination : Position
++startDate : Date
++numberOfPassengers : Integer
++shared : Boolean
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>170</y>
+      <w>45</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>690</x>
+      <y>270</y>
+      <w>45</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;70.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>645</x>
+      <y>130</y>
+      <w>135</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+error</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;20.0;250.0;20.0;250.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>645</x>
+      <y>230</y>
+      <w>135</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+error</panel_attributes>
+    <additional_attributes>10.0;50.0;10.0;20.0;250.0;20.0;250.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>765</x>
+      <y>315</y>
+      <w>20</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ok</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>795</x>
+      <y>190</y>
+      <w>75</w>
+      <h>175</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+ok</panel_attributes>
+    <additional_attributes>10.0;330.0;10.0;280.0;130.0;280.0;130.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
+      <y>355</y>
+      <w>95</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Success
+--
+
+--
+_navigateTo()_
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>395</x>
+      <y>375</y>
+      <w>55</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>355</y>
+      <w>95</w>
+      <h>65</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;screen&gt;&gt;
+Modify Profile
+--
+
+--
+_navigateTo()_
+modifyInfo()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>530</x>
+      <y>380</y>
+      <w>35</w>
+      <h>20</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-&gt;
+</panel_attributes>
+    <additional_attributes>10.0;20.0;50.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>555</x>
+      <y>365</y>
+      <w>60</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;input form&gt;&gt;
+Modify Info
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>365</y>
+      <w>60</w>
+      <h>35</h>
+    </coordinates>
+    <panel_attributes>User
+--
++name : String
+...
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>375</y>
+      <w>40</w>
+      <h>15</h>
+    </coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+</diagram>
