@@ -5,3 +5,5 @@
 *.vsdx
 *.~vsdx
 *.db
+*.out
+*.mdj

@@ -1,7 +1,129 @@
+\subsection{myTaxiService}
 \begin{itemize}
-	\item[DBMS:] this component provides access to all of the data contained in the database. It provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized.
-	\item[TaxiQueue] this component manages the queue of available taxis for each city zone. 
-	\item[Request] this component manages the incoming requests from passengers and responses from taxi drivers. It manages all types of requests, including standard, shared and reserved rides thanks to the interaction with TaxiQueues component. It takes care of messages dispatching to users.
-	\item[MapServices] 
-	\item[UserManager]
+	\item[Type] System
+	\item[Node] myTaxiServer
+	\item[Description] This is the primary entrance to the system for a user. It provides all the functionalities of myTaxiService by the interaction of software components. It provide APIs for software development.
+	\item[Attributes] myTaxiDatabase, Google Maps API
+	\item[Resources] 
+	\item[Operations]\begin{itemize}
+		\item Account service (Signup, login, personal information editing, taxi driver availability handling)
+		\item Ride request API 
+		\item Notification API
+		\item Map API
+		\item Taxi queues API
+	\end{itemize}
+\end{itemize}
+
+\subsection{Web app}
+\begin{itemize}
+	\item[Type] Web app
+	\item[Node] client
+	\item[Description] The web application provide an easy way to reach myTaxiService functionalities. Through supported web browser, the passenger can request standard, shared or reserved rides.
+	\item[Attributes]
+	\item[Resources] supported web browser (see RASD for further informations)
+	\item[Operations]\begin{itemize}
+		\item Sign up, login, personal informations editing
+		\item Ride requests (only functionalities for passenger)
+		\item Notification from service
+	\end{itemize}
+\end{itemize}
+
+\subsection{Mobile app}
+\begin{itemize}
+	\item[Type] Mobile app
+	\item[Node] client
+	\item[Description] The mobile application 
+	\item[Attributes]
+	\item[Resources] supported devices (see RASD for further informations)
+	\item[Operations] \begin{itemize}
+		\item Sign up, login, personal informations editing (for taxi driver, taxi driver availability handling)
+		\item Ride request (passenger: request for ride; taxi driver: request handling)
+		\item Notification from service
+	\end{itemize}
+\end{itemize}
+
+\subsection{Account manager}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description] This component manages users connected to the service. It manages sign-up and login functionalities, profile editing and taxi driver availability handling.
+	\item[Attributes] Data manager component
+	\item[Resources] 
+	\item[Operations] \begin{itemize}
+		\item Sign up, login, personal informations editing (for taxi driver, taxi driver availability handling)
+		\item Ride request (passenger: request for ride; taxi driver: request handling)
+		\item Notification from service
+	\end{itemize}
+\end{itemize}
+
+\subsection{Ride manager}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description] this component manages the incoming requests from passengers and responses from taxi drivers. It manages all types of requests, including standard, shared and reserved rides thanks to the interaction with Taxi Queues component. It takes care of messages dispatching to users by Notification component. It provides APIs for software development.
+	\item[Attributes] Data manager, Map services, Taxi queues, Notification, Account manager components
+	\item[Resources] 
+	\item[Operations]\begin{itemize}
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{Taxi queues}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description] this component manages the queue of available taxis for each city zone.
+	\item[Attributes] Map services component
+	\item[Resources]
+	\item[Operations] \begin{itemize}
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{Map services}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description] this component manages the city map, the taxi zones, the location informations provided by GPS navigation systems of users.
+	\item[Attributes] Data manager component, Google Maps API
+	\item[Resources] 
+	\item[Operations]\begin{itemize}
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{Notification}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description]  this component takes care of messages dispatching to the users.
+	\item[Attributes] Account manager component
+	\item[Resources] 
+	\item[Operations]\begin{itemize}
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{Data manager}
+\begin{itemize}
+	\item[Type] Subsystem
+	\item[Node] myTaxiServer
+	\item[Description]  this component provides access to all of the data contained in the database. It provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized.
+	\item[Attributes] myTaxiDatabase
+	\item[Resources] 
+	\item[Operations]\begin{itemize}
+		
+	\end{itemize}
+\end{itemize}
+
+\subsection{myTaxiDatabase}
+\begin{itemize}
+	\item[Type] System
+	\item[Node] myTaxiDatabase
+	\item[Description]  this system takes care of data storing and provisioning.
+	\item[Attributes] 
+	\item[Resources] Data warehouse
+	\item[Operations]\begin{itemize}
+		
+	\end{itemize}
 \end{itemize}
