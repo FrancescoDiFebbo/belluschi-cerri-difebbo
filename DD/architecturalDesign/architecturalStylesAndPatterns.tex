@@ -1,0 +1,16 @@
+Various architectural and logical choices have been justified as following:
+
+\begin{itemize}
+	
+	\item A \textbf{3-tier architecture} has been used: client, server application and server database.\\
+	This is due to the fact that we're developing an overall light application that doesn't need a lot of computing power, especially on the client side. Therefore, it is possible to structure the system in a logically simple and easily understandable way, without having to lose much in terms of optimization. Besides, this allows to obtain a good compromise between thin client and database tiers, and a clear correspondence between tiers and layers (i.e. no layer is distributed among multiple tiers).
+	
+	\item For similar reasons, a \textbf{SOA (Service Oriented Architecture)} has been chosen for the communication of the application server with the front ends. This improves flexibility, through modularity and a clearer documentation, and simplicity, through an higher abstraction of components.
+	
+	\item The \textbf{Plug-in logic} greatly improves modularity, allowing for a minimized application core to which adding, when needed, all the additional features and functionalities through apposite modules.
+	
+	\item The \textbf{Client\&Server} logic is the most common, simple way to manage the communication both between client and application server, and between application server and database.
+	
+	\item The \textbf{MVC (Model-View-Controller)} pattern, besides being a common choice in object-oriented languages like Java, allows for a clear logical division of the various elements of the program.
+	
+\end{itemize}
