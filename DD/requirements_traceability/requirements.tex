@@ -1,0 +1,308 @@
+\begin{enumerate}
+	\item \textbf{Visitors can register either as passengers or as taxi drivers}\\
+	Account manager permits visitors to be registered as passengers or taxi drivers during registration. User types have different functionalities. The clients applications use Account API.
+
+	\item \textbf{Visitors can abort the registration process at any time.}\\
+	The applications permit user to abort registration process. No data is stored.
+	
+	\item \textbf{The link in the confirmation email must be clicked within 1 day, otherwise the registration is deleted along with the visitor's info.}\\
+	After the registration process is completed, Account manager takes care of sending the confirmation email to new user and if he/she clicks on link provided within 1 day, he/she will be capable to use myTaxiService, otherwise registration data will be deleted.
+	
+	\item \textbf{Registration form requires user's info (fields). All fields must be contain valid inputs (see RASD for further informations)}\\
+	Users data are stored in myTaxiDatabase. myTaxiservice can access data through myTaxiDatabase API.
+	
+	\item \textbf{Email address and username cannot be the same as ones from other myTaxiService users}\\
+	Account manager ensures the uniqueness of users through the control of same emails and usernames.
+	
+	\item \textbf{Password must contain at least 8 characters}\\
+	To ensure data security the user during the registration has to provide a password containing at least 8 characters.  
+	
+	\item \textbf{Password and password confirmation must match.}\\
+	It requested to provide two times the same password to avoid typos.
+	
+	\item \textbf{Visitors can log in either as passengers or as taxi drivers}\\
+	Account manager allows access to service only to registered user.
+	
+	\item \textbf{Visitors must fill the "username" field either with an existing username
+		or with an existing email address in order to successfully log in.}\\
+	The uniqueness of username and password permits user to log in with his/her username or password.
+	
+	\item \textbf{Visitors must fill the "password" field with the only password corresponding to the submitted username/email address in order to successfully login}\\
+	To access the service password is always requested
+	
+	\item \textbf{The system will ignore log in requests if at least one of the "username" and "password" fields are left blank....}\\
+	
+	
+	\item \textbf{The system allows visitors to retrieve their password if they forget it, by
+		clicking "Forgot password?"....}\\
+	
+	\item \textbf{The system requires visitors to submit an existing email address in the
+		"username" field in order to retrieve their password....}\\
+	
+	\item \textbf{The system will take care of assigning the user a new password, when
+		he/she states to have lost the previous one....}\\
+	
+	\item \textbf{The system will take care of sending to the email address submitted by
+		the visitor the new assigned password, when he/she states to have lost the
+		previous one....}\\
+	
+	\item \textbf{The system allows visitors to retrieve their password once a day....}\\
+	
+	\item \textbf{The system allows standard taxi ride requests to passenger users....}\\
+	
+	\item \textbf{The system allows standard taxi ride requests both on the web and on the
+		mobile application....}\\
+	
+	\item \textbf{The system allows taxi ride requests if and only if the passenger accepts
+		to give info about his/her location, either through GPS or directly writing
+		down a valid location....}\\
+	
+	\item \textbf{The system allows taxi ride requests if and only if the passenger can be
+		located in some definite position of some definite taxi zone....}\\
+	
+	\item \textbf{The system uses default values for the number of passengers and sharing
+		preferences of a ride (1 person, no sharing), unless the passenger does
+		specify them....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage forwarding of pending ride
+		requests....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage the order of taxi drivers in
+		queues to send notifications to....}\\
+	
+	\item \textbf{The system forwards a ride request to the first taxi driver in the considered
+		zone queue if and only if he/she has a sufficient number of free seats
+		available in his/her vehicle....}\\
+	
+	\item \textbf{The system keeps the passenger(s) notified about the status of the ride
+		request he/she sent....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+		changes the request status from "Pending" to "Accepted"....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+		calculates the ETA of the incoming taxi based on the distance between
+		the taxi and the passenger(s), and the current traffic....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+		notifies the passenger(s) about the ETA of the incoming taxi....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+			keeps the passenger(s) notified about the current location of the incoming
+		taxi, showing its position on a map....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+		prevents the passenger(s) to make a new ride request until the taxi driver
+		changes the status of the ride to "Completed"....}\\
+	
+	\item \textbf{The system allows reserved taxi ride requests to passenger users....}\\
+	
+	\item \textbf{The system allows reserved taxi ride requests both on the web and on the
+		mobile application....}\\
+	
+	\item \textbf{The system allows reserved taxi ride requests if and only if the passenger
+		gives definite existing positions of some definite existing taxi zones both
+		for "Origin" and "Destination" fields....}\\
+	
+	\item \textbf{The system allows passengers to select locations either through GPS or
+		directly writing down a valid location....}\\
+	
+	\item \textbf{The system allows reserved taxi ride requests if and only if the passenger
+		gives complete info about the date and the time of the meeting....}\\
+	
+	\item \textbf{The system allows reserved taxi ride requests if and only if the time of the
+		request occurs at least two hours before the ride meeting time....}\\
+	
+	\item \textbf{The system forwards notifications to taxi drivers about reserved taxi ride
+		requests 10 minutes before the ride meeting time....}\\
+	
+	\item \textbf{The system uses default values for the number of passengers and sharing
+		preferences of a reserved ride (1 person, no sharing), unless the passenger
+		does specify them....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage forwarding of pending ride
+		requests....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage the order of taxi drivers in
+		queues to send notifications to....}\\
+	
+	\item \textbf{The system forwards a reserved ride request to the first taxi driver in the
+		considered zone queue if and only if he/she has a sufficient number of free
+		seats available in his/her vehicle....}\\
+	
+	\item \textbf{Once a reserved ride request has been accepted by some taxi driver, the
+		system changes the request status from "Pending" to "Accepted"....}\\
+	
+	\item \textbf{Once a reserved ride request has been accepted by some taxi driver, the
+		system calculates the ETA of the incoming taxi based on the distance
+		between the taxi and the passenger(s), and the current traffic....}\\
+	
+	\item \textbf{Once a reserved ride request has been accepted by some taxi driver, the
+		system notifies the passenger(s) about the ETA of the incoming taxi....}\\
+	
+	\item \textbf{Once a reserved ride request has been accepted by some taxi driver, the
+		system keeps the passenger(s) notified about the current location of the
+		incoming taxi, showing its position on a map....}\\
+	
+	\item \textbf{Once a reserved ride request has been accepted by some taxi driver, the
+		system prevents the passenger(s) to make a new ride request until the taxi
+		driver changes the status of the ride to "Completed"....}\\
+	
+	\item \textbf{The system allows taxi ride sharing to passenger users....}\\
+	
+	\item \textbf{The system allows taxi ride sharing both on the web and on the mobile
+		application....}\\
+	
+	\item \textbf{The system allows both standard shared taxi ride requests and reserved
+		shared taxi ride requests, simply ticking the "Share" checkbox while doing
+		any any kind of taxi ride request....}\\	
+	
+	\item \textbf{Both kinds of shared ride requests require no less data than their non-
+		shared forms (see also 3.2.3, "Standard ride request" and 3.2.4, "Reserved
+		ride request")....}\\
+	
+	\item \textbf{The system allows standard shared taxi ride requests if and only if the
+		passenger also gives a definite existing position of some definite existing
+		taxi zone as "Destination" (reserved taxi ride requests already require this,
+		even if non-shared)....}\\
+	
+	\item \textbf{The system allows passengers to select the input for "Destination" either
+		through GPS or directly writing down a valid location....}\\
+	
+	\item \textbf{The system, at the time of forwarding any shared ride request, will use a
+		special algorythm to calculate good arrangements between different shared
+		ride requests....}\\
+	
+	\item \textbf{The arrangement algorythm search different shared ride requests to form
+		a single, grouped, shared ride request....}\\
+	
+	\item \textbf{The arrangement algorythm considers for grouping only shared rides with
+		close "Origin" positions and similar directions towards "Destination" po-
+		sitions. Similar directions means that going from the origin to the farthest
+		destination implies passing by the other destination(s) as well....}\\
+	
+	\item \textbf{The arrangement algorythm also considers the total number of passengers
+		in a taxi. Groups that would occupy too many seats are not eligible....}\\
+	
+	\item \textbf{The arrangement algorythm can group even standard and reserved ride
+		requests together, as long as all the others requirements are met....}\\
+	
+	\item \textbf{The system will consider group requests as a single one when forwarding
+		them to taxi drivers....}\\
+	
+	\item \textbf{Taxi drivers can see all details of all shared requests when receiving noti-
+		fication of a grouped request....}\\
+	
+	\item \textbf{Taxi drivers can accept or refuse grouped requests as normal....}\\
+	
+	\item \textbf{The system will automatically split up groups of shared requests if they're
+		continuously refused, or simply not accepted, for 3 minutes since their
+		forwarding....}\\
+	
+	\item \textbf{The system will then proceed to recalculate possible groups with the spe-
+		cial algorythm, but excluding the arrangements that were already tried....}\\
+	
+	\item \textbf{The system calculates how to split taxi fees equally on all passengers on
+		a shared ride, depending on the distance traveled by each one and the
+		number of passengers during each part of the ride....}\\
+	
+	\item \textbf{The system notifies the taxi driver how much of the total fee each passenger
+		will have to pay, in percentage....}\\
+	
+	\item \textbf{The system allows taxi drivers to receive ride request notifications on
+		their mobile phone application and respond to them, either accepting or
+		refusing....}\\
+	
+	\item \textbf{The system notifies taxi drivers about all request notifications forwarded
+		to them....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage forwarding of pending ride
+		requests....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage the order of taxi drivers in
+		queues to send notifications to....}\\
+	
+	\item \textbf{The system forwards a ride request to the first taxi driver in the considered
+		zone queue if and only if he/she has a sufficient number of free seats
+		available in his/her vehicle....}\\
+	
+	\item \textbf{Taxi zone queues contain only taxi drivers that currently have status
+		"Ready"....}\\
+	
+	\item \textbf{Taxi zone queues contain only taxi drivers that are currently located in
+		that taxi zone....}\\
+	
+	\item \textbf{Taxi ride notifications show all requesting passengers' username and position on a map....}\\
+	
+	\item \textbf{The system gives taxi drivers one minute to accept or refuse request noti-
+		fications, otherwise take it as a refusal. This is to avoid long waiting times
+		for passengers....}\\
+	
+	\item \textbf{Once a ride request has been accepted by some taxi driver, the system
+		changes his/her status to "Busy" and he/she's removed from his/her taxi
+		zone queue....}\\
+	
+	\item \textbf{The system allows taxi drivers to notify the end of the ride, when they're
+		doing one (i.e. when they accepted a ride request)....}\\
+	
+	\item \textbf{Once a taxi driver notifies the end of a ride, the system changes his/her
+		status to "Ready" and he/she's put on the bottom of his/her taxi zone
+		queue....}\\
+	
+	\item \textbf{The system uses a FIFO policy to manage taxi zone queues....}\\
+	
+	\item \textbf{The system uses info provided by the GPS to locate taxis and decide their
+		respective queues....}\\
+	
+	\item \textbf{The system automatically inserts taxi drivers in queues when their status
+		changes to "Ready"....}\\
+	
+	\item \textbf{The system automatically removes taxi drivers from queues when their
+		status changes to "Busy" or "Offline"....}\\
+	
+	\item \textbf{The status automatically changes to "Busy" when the taxi driver accepts
+		a ride request....}\\
+	
+	\item \textbf{The status automatically changes to "Ready" when the taxi driver notifies
+		the end of a ride....}\\
+	
+	\item \textbf{When status is "Ready", the application notifies about ride requests....}\\
+	
+	\item \textbf{When status is "Ready", the application enables the taxi driver to accep-
+		t/refuse requests....}\\
+	
+	\item \textbf{When status is "Busy", the application prevents ride requests notifica-
+		tions....}\\
+	
+	\item \textbf{When status is "Busy", the application enables the taxi driver to notify
+		the end of the current ride....}\\
+	
+	\item \textbf{Account settings are available to both passenger and taxi driver users....}\\
+	
+	\item \textbf{Account settings are available both on the web and the mobile application....}\\
+	
+	\item \textbf{Account settings are accessible from the start screen of both apps, through
+		the "Profile" button....}\\
+	
+	\item \textbf{The system allows users to view all their profile info, submitted during
+		registration (see also 3.2.1, "Registration")....}\\
+	
+	\item \textbf{The system allows users to modify all their profile info, submitted during
+		registration, with the only exception of username....}\\
+	
+	\item \textbf{Modifying the password requires to write the old one, and the new one
+		twice; if the former password is not correct or if the two new passwords
+		submitted do not match, the system asks for all passwords again and
+		notifies the user....}\\
+	
+	\item \textbf{Modifying the email address, the taxi license ID or the taxi code requires
+		that the new one doesn't match with the one of another registered user....}\\
+	
+	\item \textbf{ Modifying the email address requires confirmation through an email sent
+		to the submitted email address....}\\
+	
+	\item \textbf{The system allows users to abort modifications at any time....}\\
+	
+	\item \textbf{The system allows users to delete their account: confirmation is required
+		to proceed....}\\		
+\end{enumerate}
