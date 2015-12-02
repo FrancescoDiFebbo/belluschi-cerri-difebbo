@@ -1,27 +1,27 @@
 \subsection{myTaxiService}
 \begin{itemize}
-	\item[Type] System
-	\item[Node] myTaxiServer
-	\item[Description] This is the primary entrance to the system for a user. It provides all the functionalities of myTaxiService by the interaction of software components. It provide APIs for software development.
-	\item[Attributes] myTaxiDatabase, Google Maps API
-	\item[Resources] 
-	\item[Operations]\begin{itemize}
-		\item Account service (Signup, login, personal information editing, taxi driver availability handling)
-		\item Ride request API 
-		\item Notification API
-		\item Map API
-		\item Taxi queues API
+	\item[]\textbf{Type} System
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description} This is the primary entrance to the system for a user. It provides all the functionalities of myTaxiService by the interaction of software components. It provide APIs for software development.
+	\item[]\textbf{Dependencies} myTaxiDatabase, Google Maps API
+	\item[]\textbf{Resources} Glassfish 4.1.1 on Linux Ubuntu Server 14.04.3L LTE on server
+	\item[]\textbf{Operations}\begin{itemize}
+		\item Account API (sign-up, login, personal information editing, taxi driver availability handling)
+		\item Ride request API (standard, shared, reserve ride request)
+		\item Notification API (notifications from system)
+		\item Map API (city zones, geolocation services)
+		\item Queues API (taxi queues management)
 	\end{itemize}
 \end{itemize}
 
 \subsection{Web app}
 \begin{itemize}
-	\item[Type] Web app
-	\item[Node] client
-	\item[Description] The web application provide an easy way to reach myTaxiService functionalities. Through supported web browser, the passenger can request standard, shared or reserved rides.
-	\item[Attributes]
-	\item[Resources] supported web browser (see RASD for further informations)
-	\item[Operations]\begin{itemize}
+	\item[]\textbf{Type} Web app
+	\item[]\textbf{Node} client
+	\item[]\textbf{Description} The web application provide an easy way to reach myTaxiService functionalities. Through supported web browser, the passenger can request standard, shared or reserved rides.
+	\item[]\textbf{Dependencies} Account API, Ride request API, Notification API
+	\item[]\textbf{Resources} supported web browser (see RASD for further informations)
+	\item[]\textbf{Operations}\begin{itemize}
 		\item Sign up, login, personal informations editing
 		\item Ride requests (only functionalities for passenger)
 		\item Notification from service
@@ -30,12 +30,12 @@
 
 \subsection{Mobile app}
 \begin{itemize}
-	\item[Type] Mobile app
-	\item[Node] client
-	\item[Description] The mobile application 
-	\item[Attributes]
-	\item[Resources] supported devices (see RASD for further informations)
-	\item[Operations] \begin{itemize}
+	\item[]\textbf{Type} Mobile app
+	\item[]\textbf{Node} client
+	\item[]\textbf{Description} The mobile application extends web functionalities by adding taxi driver services. 
+	\item[]\textbf{Dependencies} Account API, Ride request API, Notification API
+	\item[]\textbf{Resources} supported devices (see RASD for further informations)
+	\item[]\textbf{Operations} \begin{itemize}
 		\item Sign up, login, personal informations editing (for taxi driver, taxi driver availability handling)
 		\item Ride request (passenger: request for ride; taxi driver: request handling)
 		\item Notification from service
@@ -44,12 +44,12 @@
 
 \subsection{Account manager}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description] This component manages users connected to the service. It manages sign-up and login functionalities, profile editing and taxi driver availability handling.
-	\item[Attributes] Data manager component
-	\item[Resources] 
-	\item[Operations] \begin{itemize}
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description} This component manages users connected to the service. It manages sign-up and login functionalities, profile editing and taxi driver availability handling.
+	\item[]\textbf{Dependencies} Data manager component
+	\item[]\textbf{Resources} 
+	\item[]\textbf{Operations} \begin{itemize}
 		\item Sign up, login, personal informations editing (for taxi driver, taxi driver availability handling)
 		\item Ride request (passenger: request for ride; taxi driver: request handling)
 		\item Notification from service
@@ -58,72 +58,72 @@
 
 \subsection{Ride manager}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description] this component manages the incoming requests from passengers and responses from taxi drivers. It manages all types of requests, including standard, shared and reserved rides thanks to the interaction with Taxi Queues component. It takes care of messages dispatching to users by Notification component. It provides APIs for software development.
-	\item[Attributes] Data manager, Map services, Taxi queues, Notification, Account manager components
-	\item[Resources] 
-	\item[Operations]\begin{itemize}
-		
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description} this component manages the incoming requests from passengers and responses from taxi drivers. It manages all types of requests, including standard, shared and reserved rides thanks to the interaction with Taxi Queues component. It takes care of messages dispatching to users by Notification component. It provides APIs for software development.
+	\item[]\textbf{Dependencies} Data manager, Map services, Taxi queues, Notification, Account manager components
+	\item[]\textbf{Resources} 
+	\item[]\textbf{Operations}\begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
 
 \subsection{Taxi queues}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description] this component manages the queue of available taxis for each city zone.
-	\item[Attributes] Map services component
-	\item[Resources]
-	\item[Operations] \begin{itemize}
-		
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description} this component manages the queue of available taxis for each city zone.
+	\item[]\textbf{Dependencies} Map services component
+	\item[]\textbf{Resources}
+	\item[]\textbf{Operations} \begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
 
 \subsection{Map services}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description] this component manages the city map, the taxi zones, the location informations provided by GPS navigation systems of users.
-	\item[Attributes] Data manager component, Google Maps API
-	\item[Resources] 
-	\item[Operations]\begin{itemize}
-		
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description} this component manages the city map, the taxi zones, the location informations provided by GPS navigation systems of users.
+	\item[]\textbf{Dependencies} Data manager component, Google Maps API
+	\item[]\textbf{Resources} 
+	\item[]\textbf{Operations}\begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
 
 \subsection{Notification}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description]  this component takes care of messages dispatching to the users.
-	\item[Attributes] Account manager component
-	\item[Resources] 
-	\item[Operations]\begin{itemize}
-		
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description}  this component takes care of messages dispatching to the users.
+	\item[]\textbf{Dependencies} Account manager component
+	\item[]\textbf{Resources} 
+	\item[]\textbf{Operations}\begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
 
 \subsection{Data manager}
 \begin{itemize}
-	\item[Type] Subsystem
-	\item[Node] myTaxiServer
-	\item[Description]  this component provides access to all of the data contained in the database. It provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized.
-	\item[Attributes] myTaxiDatabase
-	\item[Resources] 
-	\item[Operations]\begin{itemize}
-		
+	\item[]\textbf{Type} Subsystem
+	\item[]\textbf{Node} myTaxiServer
+	\item[]\textbf{Description}  this component provides access to all of the data contained in the database. It provides various functions that allow entry, storage and retrieval of large quantities of information and provides ways to manage how that information is organized.
+	\item[]\textbf{Dependencies} myTaxiDatabase
+	\item[]\textbf{Resource} 
+	\item[]\textbf{Operations}\begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
 
 \subsection{myTaxiDatabase}
 \begin{itemize}
-	\item[Type] System
-	\item[Node] myTaxiDatabase
-	\item[Description]  this system takes care of data storing and provisioning.
-	\item[Attributes] 
-	\item[Resources] Data warehouse
-	\item[Operations]\begin{itemize}
-		
+	\item[]\textbf{Type} System
+	\item[]\textbf{Node} myTaxiDatabase
+	\item[]\textbf{Description}  this system takes care of data storing and provisioning.
+	\item[]\textbf{Dependencies}
+	\item[]\textbf{Resources} Data warehouse
+	\item[]\textbf{Operations}\begin{itemize}
+		\item
 	\end{itemize}
 \end{itemize}
