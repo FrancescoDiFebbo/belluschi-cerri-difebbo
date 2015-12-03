@@ -1,0 +1,163 @@
+The most noteworthy algorithms used by myTaxiService are the following:
+
+\begin{itemize}
+	\item Queue management algorithm
+	\item Grouping algorithm
+	\item Forwarding algorithm
+	\item Fee calculation algorithm
+\end{itemize}
+	
+\section{Queue management algorithm}
+	The city is divided in a certain number of taxi zones. To each zone, a local, FIFO managed taxi queue is assigned, used by the system in order to handle all the available taxi drivers that are currently located in it [see RASD for further explanations]. Whenever certain events occur, the system launchs a \textit{queue management algorithm} to modify the elements and/or the order of the taxi queue.\\
+	Events and their consequences are described in the following table:\\
+	
+	[Legend]
+	\begin{itemize}
+		\item $TD_i$: taxi driver, \textbf{currently} located in zone $i$;
+		\item $RR_i$: taxi ride request, with starting point in zone $i$;
+		\item $Q_i$: taxi queue, related to zone $i$;
+	\end{itemize}
+	
+	\begin{center}
+		\begin{tabular}{l|r}
+			\textbf{Event} & \textbf{Consequences}\\ [1.5ex]
+			\hline\hline\\
+			\multirow{2}{15em}{$TD_z$ logs in}
+			& $TD_z$ is pushed in $Q_z$\\
+			& $TD_z$'s status = "Ready"\\ [1.5ex]
+			\hline\\
+			$RR_z$ incomes
+			& $RR_z$ is forwarded to $TD_z$ on top of $Q_z$\\ [1.5ex]
+			\hline\\
+			\multirow{2}{15em}{$TD_z$ on top of $Q_z$ accepts $RR_z$}
+			& $TD_z$ is removed from $Q_z$\\
+			& $TD_z$'s status = "Busy"\\ [1.5ex]
+			\hline\\
+			\multirow{3}{15em}{$TD_z$ on top of $Q_z$ refuses $RR_z$}
+			& $TD_z$ is removed from $Q_z$\\
+			& $TD_z$ is pushed in $Q_z$\\
+			& repeat "$RR_z$ incomes"\\ [1.5ex]
+			\hline\\
+			\multirow{2}{15em}{$TD_z$ ends a ride}
+			& $TD_z$ is put on bottom of $Q_z$\\
+			& $TD_z$'s status = "Ready"\\ [1.5ex]
+			\hline\\
+			\multirow{3}{15em}{$TD_z$ ends his/her workshift\\ \textit{or}\\ $TD_z$ logs out}
+			& if ($TD_z$'s status == "Ready")\\
+			& \{$TD_z$ is removed from $Q_z$\}\\
+			& $TD_z$'s status = "Offline"\\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\section{Grouping algorithm}
+	Shared rides requests can be grouped and forwarded as a single one, provided that certain requirements about the requests info are met [see RASD for further explanations].
+	At the time of forwarding a shared ride request, the system launchs a \textit{grouping algorithm} to identify other ride requests eligible for grouping with the first one. In case there are some, the algorithm proceeds with the grouping; otherwise, it takes up to one minute to wait for new ones. If even after a minute no eligible requests are found, the system simply forwards the shared ride request as a single, non-shared request.
+	The following contraints describe in detail the requirements for two (or more) ride requests to be eligible for grouping:\\
+
+	[Legend]
+	\begin{itemize}
+		\item $SRR$: pending shared ride request;
+		\item $SRR_i \star SRR_j$: pending grouped ride request;
+		\item $SRR.startLocation$: ride starting location, indicated in $SRR$;
+		\item $SRR.startDate$: ride starting date and time, indicated in $SRR$;
+		\item $SRR.duration$: ride estimated duration, calculated from $SRR$;
+		\item $SRR.passengers$: ride total number of passengers, indicated in $SRR$;
+		\item $distanceConstraint$ [meters]: variable that expresses the maximum acceptable distance between the starting locations of two different shared ride requests in order for them to be eligible for grouping ("similar starting locations");
+		\item $dateConstraint$ [minutes]: variable that expresses the maximum acceptable time interval between the starting dates of two different shared ride requests in order for them to be eligible for grouping ("similar date and time");
+		\item $directionConstraint$ [percentage]: variable that expresses the maximum acceptable percentage of additional duration of a ride, in case its ride request has been grouped with another one ("similar directions");
+		\item $taxiCapacityConstraint$ [int]: variable that expresses the maxinum number of seats available in a taxi; if the sum of all passengers of two different shared ride requests is higher that this number, the two requests are not eligible for grouping ("enough seats available");
+	\end{itemize}
+	
+	[Requirements for grouping]\\
+	$\forall i,j (i \neq j)$:
+	\begin{enumerate}
+		\item $ | SRR_i.startLocation - SRR_j.startLocation | \leq distanceConstraint$
+		\item $ | SRR_i.startDate - SRR_j.startDate | \leq dateConstraint $
+		\item $ SRR_i.destination  \leq (SRR_i \star SRR_j).destination(1 + directionConstraint) $
+		\item $ SRR_i.passengers + SRR_j.passengers \leq taxiCapacityConstraint $
+	\end{enumerate} 
+	
+	\textbf{Note}: in case, at any time, there are more than two eligible shared rides requests to be grouped with each other, the algorithm groups two of them, then tries to group a third request to the first two (checking again requirement 4.), and so on.
+	For example, let's consider the case where
+	\begin{itemize}
+		\item $SRR_1 \star SRR_2$
+		\item $SRR_1 \star SRR_3$
+		\item $SRR_2 \star SRR_3$
+	\end{itemize}
+	are all eligible groups. The algorithm groups $SRR_1$ and $SRR_2$, then tries to group $(SRR_1 \star SRR_2)$ with $SRR_3$. If requirement 4. is fullfilled, it creates $(SRR_1 \star SRR_2 \star SRR_3$), otherwise forwards $(SRR_1 \star SRR_2)$ and $SRR_3$ separately.
+	
+\section{Forwarding algorithm}
+	Rides requests are forwarded in different ways, according to their type. In particular, reserved ride requests are forwarded only 10 minutes before the starting time indicated in the request, while shared ride requests need the grouping algorithm to be launched beforehand [see RASD for further explanations]. Note that this means that ride requests that are both shared \textit{and} reserved follow both sets of rules: their design admittedly favors the certainty of the reserving to the possibility of sharing.
+	In any case, at the time of forwarding any kind of ride request, the system launchs a \textit{forwarding algorithm}.\\
+	Request types and their management are described in the following table:\\
+	
+	[Legend]
+	\begin{itemize}
+		\item $TD_i$: taxi driver, \textbf{currently} located in zone $i$;
+		\item $RR_i$: taxi ride request, with starting point in zone $i$;
+		\item $RR_i.startDate$: ride starting date and time, indicated in $RR_i$;
+		\item $Q_i$: taxi queue, related to zone $i$;
+	\end{itemize}
+	
+	\begin{center}
+		\begin{tabular}{l|l}
+			\textbf{Incoming request type} & \textbf{Forwarding}\\ [1.5ex]
+			\hline\hline\\
+			Standard $RR_z$
+			& Standard forwarding until accepted\\ [1.5ex]
+			\hline\\
+			\multirow{2}{15em}{Reserved $RR_z$}
+			& \textit{(at $RR_z.startDate - 10 minutes$)}\\
+			& Standard forwarding until accepted\\ [1.5ex]
+			\hline\\
+			\multirow{7}{15em}{Shared $RR_z$}
+			& apply Grouping algorithm \textit{(up to 1 minute)}\\
+			& \textit{if non-grouped}:\\
+			& \ \ \ \ \ Standard forwarding until accepted\\
+			& \textit{if grouped}:\\
+			& \ \ \ \ \ Standard forwarding for 3 minutes\\
+			& \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
+			& \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
+			\hline\\
+			\multirow{8}{15em}{Reserved\&Shared $RR_z$}
+			& \textit{(at $RR_z.startDate - 10 minutes$)}\\
+			& apply Grouping algorithm \textit{(up to 1 minute)}\\
+			& \textit{if non-grouped}:\\
+			& \ \ \ \ \ Standard forwarding until accepted\\
+			& \textit{if grouped}:\\
+			& \ \ \ \ \ Standard forwarding for 3 minutes\\
+			& \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
+			& \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+	(*) \textbf{Note}: when repeating the grouping algorithm, all groups of shared ride requests that have already been tried and not accepted within three minutes are discarded from the possible groupings.
+	
+\section{Fee calculation algorithm}
+	Whenever a taxi driver reaches the destination of one or more passengers during a shared ride, be it the last stop of the ride or not, all passengers that are going to get off the taxi must pay an equal percentage of the taxi fee, depending on the number of passengers and traveling distance provided in their respective ride requests [see RASD for further explanations]. To do so, whenever a grouped, shared ride request is accepted by some taxi driver, the system launchs a \textit{fee calculation algorithm} to equally split the taxi fee among passenger users, in percentage.\\
+	The taxi fee calculation is described by the following formula:\\
+	
+	[Legend]
+	\begin{itemize}
+		\item $P$: set of all passenger \textbf{users} involved in the ride;
+		\item $p$: generic passenger user $\in P$;
+		\item $Fee_p$: comprehensive* taxi fee, related to passenger user $p$;
+		\item $AverageFee_p$: taxi fee per-person*, related to passenger user $p$;
+		\item $p.numPass$: number of passengers, indicated in $p$'s ride request;
+		\item $p.distance$: distance to travel, calculated from starting location and destination indicated in $p$'s ride request;
+	\end{itemize}
+	
+	\begin{center}
+		$Fee_p = \frac
+		{p.numPass * p.distance}
+		{\sum\limits_{i \in P} i.numPass * i.distance }$ \%
+		
+		$AverageFee_p = \frac
+		{TotalFee_p}
+		{p.numPass}$ \%
+	\end{center}
+	
+	(*) \textbf{Note:} $Fee_p$ refers to the total payment of \textit{all} passengers indicated in $p$'s request, while $AverageFee_p$ refers to an equal splitting of $Fee_p$ among \textit{each} passenger in $p$'s request.\\
+	Note that $AverageFee_p$ is simply an indication, it is not mandatory that every single passenger pays it exactly, as long as $p$'s group pays $Fee_p$ completely.
