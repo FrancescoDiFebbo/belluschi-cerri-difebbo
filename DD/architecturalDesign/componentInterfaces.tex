@@ -1,0 +1,282 @@
+This section describes all interfaces between components, their interaction and their input/output parameters. Regarding all myTaxiServer (application) internal components, see also \textit{RASD} and chapter 2.2, \textit{"High level components and their interaction"} for further, detailed explanations about their functioning, dependencies, resources, operations and parameters.
+
+\subsection{Application$\leftrightarrow$Database Interface}
+	\begin{itemize}
+		\item [] \textbf{Components}:
+			\begin{itemize}
+				\item Data Manager (myTaxiServer) (Application)
+				\item myTaxiDatabase (Database)
+			\end{itemize}			
+		\item [] \textbf{Communication system}: JPA, JDBC APIs;
+		\item [] \textbf{Protocols}: standard TCP/IP protocols;
+	\end{itemize}
+	
+\subsection{Application$\leftrightarrow$Client Interface}
+	\begin{itemize}
+		\item [] \textbf{Components}:
+		\begin{itemize}
+			\item myTaxiServer (Application)
+			\item Mobile App (Client)
+			\item Web App (Client)
+		\end{itemize}			
+		\item [] \textbf{Communication system}: JAX-RS API (RESTful interface);
+		\item [] \textbf{Protocols}: standard HTTPS protocol;
+	\end{itemize}
+	
+\subsection{Account manager}
+	\begin{center}
+		\begin{tabular}{ l | c | l   r }
+			\multirow{2}{*}{\textbf{Operation}} & \textbf{Involved} & \textbf{Input/Output} & \multirow{2}{*}{[type]}\\
+			& \textbf{Users} & \textbf{Parameters} & \\ [1.5ex]
+			\hline\hline\\
+			
+			% GENERAL
+			\multirow{2}{*}{\textit{(General)}}
+				& \multirow{2}{*}{\textit{(All)}}
+					&	token & [/]\\
+					&&	errors & [/]\\ [1.5ex]
+			\hline\\
+			
+			% REGISTRATION
+			\multirow{9}{*}{\textbf{Registration}}
+			\multirow{4}{*}{\textit{(Passengers)}}
+				& \multirow{4}{*}{Visitors}
+					&	username & [string]\\
+					&&	email & [string]\\
+					&&	password & [string]\\
+					&&	... & \\ [1.5ex]
+				\cline{2-4}\\
+			\multicolumn{1}{r}{\multirow{5}{*}{\textit{(Taxi Drivers)}}}
+				& \multirow{5}{*}{Visitors}
+					&	username & [string]\\
+					&&	email & [string]\\
+					&&	password & [string]\\
+					&&	license ID & [string]\\
+					&&	... & \\ [1.5ex]
+			\hline\\
+			
+			% LOGIN
+			\multirow{2}{*}{\textbf{Login}}
+				& \multirow{2}{*}{Visitors}
+					&	username/email & [string]\\
+					&&	password & [string]\\ [1.5ex]
+			\hline\\
+			
+			% EMAIL CONFIRMATION
+			\multirow{2}{*}{\textbf{Email Confirmation}}
+				& \multirow{1}{*}{Passengers}
+					&	\multirow{2}{*}{password} & \multirow{2}{*}{[string]}\\
+				& \multirow{1}{*}{Taxi Drivers}
+					&& \\ [1.5ex]
+			\hline\\
+			
+			% PROFILE EDITING
+			\multirow{4}{*}{\textbf{Profile Editing}}
+				& \multirow{3}{*}{Passengers}
+					& new email & [string]\\
+				& \multirow{3}{*}{Taxi Drivers}
+					& new password & [string]\\
+					&& new address & [string]\\
+					&& ... & \\ [1.5ex]
+			\hline\\
+			
+			% PROFILE DELETING
+			\multirow{2}{*}{\textbf{Profile Deleting}}
+				& \multirow{1}{*}{Passengers}
+					&	token & [/]\\
+				& \multirow{1}{*}{Taxi Drivers}
+					&	password & [string]\\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\subsection{Ride manager}
+	\begin{center}
+		\begin{tabular}{ l | c | l   r }
+			\multirow{2}{*}{\textbf{Operation}} & \textbf{Involved} & \textbf{Input/Output} & \multirow{2}{*}{[type]}\\
+			& \textbf{Users} & \textbf{Parameters} & \\ [1.5ex]
+			\hline\hline\\
+			
+			% GENERAL
+			\multirow{2}{*}{\textit{(General)}}
+				& \multirow{2}{*}{\textit{(All)}}
+					&	token & [/]\\
+					&&	errors & [/]\\ [1.5ex]
+			\hline\\
+			
+			% RIDE REQUEST
+			\multirow{17}{*}{\textbf{Ride Request}}
+			\multirow{8}{*}{\textit{(Standard)}}
+				& \multirow{7}{*}{Passengers}
+					&	requesting passenger(s) & [string]\\
+				& \multirow{7}{*}{Taxi Drivers}
+					&	start location(s) & [Position]\\
+					&&	num of passengers & [int]\\
+					&&	... & \\
+					&&	shared & [boolean]\\
+					&&	destination(s) & [Position]\\
+					&&	grouped & [boolean]\\
+					&&	... & \\ [1.5ex]
+				\cline{2-4}\\
+			\multicolumn{1}{r}{\multirow{8}{*}{\textit{(Reserved)}}}
+				& \multirow{7}{*}{Passengers}
+					&	requesting passenger(s) & [string]\\
+				& \multirow{7}{*}{Taxi Drivers}
+					&	start location(s) & [Position]\\
+					&&	destination(s) & [Position]\\
+					&&	num of passengers & [int]\\
+					&&	... & \\
+					&&	shared & [boolean]\\
+					&&	grouped & [boolean]\\
+					&&	... & \\ [1.5ex]
+			\hline\\
+			
+			% RIDE
+			\multirow{7}{*}{\textbf{Ride}}
+				& \multirow{6}{*}{Passengers}
+					&	start location(s) & [Position]\\
+				& \multirow{6}{*}{Taxi Drivers}
+					&	destination(s) & [Position]\\
+					&&	start date(s) & [date]\\
+					&&	end date & [date]\\
+					&&	num of passengers & [int]\\
+					&&	shared & [boolean]\\
+					&&	... & \\ [1.5ex]
+			\hline\\
+			
+			% REQUEST STATUS UPDATE
+			\multirow{2}{*}{\textbf{Request Status Update}}
+			& \multirow{1}{*}{Passengers}
+			& request status & [enum]\\
+			& \multirow{1}{*}{Taxi Drivers}
+			& new request status & [enum]\\ [1.5ex]
+			\hline\\
+			
+			% RIDE STATUS UPDATE
+			\multirow{2}{*}{\textbf{Ride Status Update}}
+				& \multirow{1}{*}{Passengers}
+					& ride status & [enum]\\
+				& \multirow{1}{*}{Taxi Drivers}
+					& new ride status & [enum]\\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+
+\subsection{Taxi queues}
+	\begin{center}
+		\begin{tabular}{ l | c | l   r }
+			\multirow{2}{*}{\textbf{Operation}} & \textbf{Involved} & \textbf{Input/Output} & \multirow{2}{*}{[type]}\\
+			& \textbf{Users} & \textbf{Parameters} & \\ [1.5ex]
+			\hline\hline\\
+			
+			% GENERAL
+			\multirow{2}{*}{\textit{(General)}}
+				& \multirow{2}{*}{\textit{(All)}}
+				&	token & [/]\\
+				&&	errors & [/]\\ [1.5ex]
+			\hline\\
+			
+			% QUEUES MANAGEMENT
+			\multirow{2}{*}{\textbf{Queues Management}}
+				& \multirow{2}{*}{Taxi Drivers}
+					&	taxi driver(s) & [Taxi Driver]\\
+					&&	taxi zone & [Zone]\\ [1.5ex]
+			\hline\\
+			
+			% AVAILABILITY SETTINGS
+			\multirow{2}{*}{\textbf{Availability Settings}}
+				& \multirow{2}{*}{Taxi Drivers}
+					&	driver status & [enum]\\
+					&&	new driver status & [enum]\\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\subsection{Map services}
+	\begin{center}
+		\begin{tabular}{ l | c | l   r }
+			\multirow{2}{*}{\textbf{Operation}} & \textbf{Involved} & \textbf{Input/Output} & \multirow{2}{*}{[type]}\\
+			& \textbf{Users} & \textbf{Parameters} & \\ [1.5ex]
+			\hline\hline\\
+			
+			% GENERAL
+			\multirow{2}{*}{\textit{(General)}}
+				& \multirow{2}{*}{\textit{(All)}}
+					&	token & [/]\\
+					&&	errors & [/]\\ [1.5ex]
+			\hline\\
+			
+			% ZONES MANAGEMENT
+			\multirow{3}{*}{\textbf{Zones Management}}
+				& \multirow{2}{*}{Passengers}
+					&	location & [Position]\\
+				& \multirow{2}{*}{Taxi Drivers}
+					&	taxi queue & [Queue]\\
+					&&	taxi zone & [Zone]\\[1.5ex]
+			\hline\\
+			
+			% GOOGLE MAPS APIs
+			\multirow{2}{*}{\textbf{Google Maps APIs}}
+				& \multirow{1}{*}{Passengers}
+					&	address & [string]\\
+				& \multirow{1}{*}{Taxi Drivers}
+					&	location & [Position]\\[1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\subsection{Notification}
+	\begin{center}
+		\begin{tabular}{ l | c | l   r }
+			\multirow{2}{*}{\textbf{Operation}} & \textbf{Involved} & \textbf{Input/Output} & \multirow{2}{*}{[type]}\\
+			& \textbf{Users} & \textbf{Parameters} & \\ [1.5ex]
+			\hline\hline\\
+			
+			% GENERAL
+			\multirow{2}{*}{\textit{(General)}}
+				& \multirow{2}{*}{\textit{(All)}}
+					&	token & [/]\\
+					&&	errors & [/]\\ [1.5ex]
+			\hline\\
+			
+			% RIDE REQUEST NOTIFICATION
+			\multirow{15}{*}{\textbf{Ride Request}}
+				& \multirow{5}{*}{Passengers}
+					&	acceptor taxi driver & [string]\\
+				\multirow{15}{*}{\textbf{Notification}}
+					&&	driver location & [Position]\\
+					&&	ETA & [interval]\\
+					&&	grouped & [boolean]\\
+					&&	... & \\ [1.5ex]
+			\cline{2-4}\\
+				& \multirow{10}{*}{Taxi Drivers}
+					&	requesting passenger(s) & [string]\\
+					&&	start location(s) & [Position]\\
+					&&	destination(s) & [Position]\\
+					&&	ETA(s) & [interval]\\
+					&&	estimated durations(s) & [interval]\\
+					&&	num of passengers & [int]\\
+					&&	shared & [boolean]\\
+					&&	grouped & [boolean]\\
+					&&	fee(s) & [percentage]\\
+					&&	... & \\ [1.5ex]
+			\hline\\
+			
+			% RIDE HANDLING NOTIFICATION
+			\multirow{7}{*}{\textbf{Ride Handling}}
+				& \multirow{8}{*}{Taxi Drivers}
+					&	start location(s) & [Position]\\
+			\multirow{7}{*}{\textbf{Notification}}
+					&&	destination(s) & [Position]\\
+					&&	ETA(s) & [interval]\\
+					&&	estimated durations(s) & [interval]\\
+					&&	shared & [boolean]\\
+					&&	grouped & [boolean]\\
+					&&	fee(s) & [percentage]\\
+					&&	... & \\ [1.5ex]
+			\hline
+		\end{tabular}
+	\end{center}
+	
+\subsection{Data manager}
+	See subsection 2.6.1, \textit{"Application$\leftrightarrow$Database Interface"}.

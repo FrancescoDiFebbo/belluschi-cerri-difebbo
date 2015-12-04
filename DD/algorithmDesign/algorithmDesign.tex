@@ -1,11 +1,4 @@
 The most noteworthy algorithms used by myTaxiService are the following:
-
-\begin{itemize}
-	\item Queue management algorithm
-	\item Grouping algorithm
-	\item Forwarding algorithm
-	\item Fee calculation algorithm
-\end{itemize}
 	
 \section{Queue management algorithm}
 	The city is divided in a certain number of taxi zones. To each zone, a local, FIFO managed taxi queue is assigned, used by the system in order to handle all the available taxi drivers that are currently located in it [see RASD for further explanations]. Whenever certain events occur, the system launchs a \textit{queue management algorithm} to modify the elements and/or the order of the taxi queue.\\
@@ -22,7 +15,7 @@ The most noteworthy algorithms used by myTaxiService are the following:
 		\begin{tabular}{l|r}
 			\textbf{Event} & \textbf{Consequences}\\ [1.5ex]
 			\hline\hline\\
-			\multirow{2}{15em}{$TD_z$ logs in}
+			\multirow{2}{*}{$TD_z$ logs in}
 			& $TD_z$ is pushed in $Q_z$\\
 			& $TD_z$'s status = "Ready"\\ [1.5ex]
 			\hline\\
@@ -114,21 +107,21 @@ The most noteworthy algorithms used by myTaxiService are the following:
 			\multirow{7}{15em}{Shared $RR_z$}
 			& apply Grouping algorithm \textit{(up to 1 minute)}\\
 			& \textit{if non-grouped}:\\
-			& \ \ \ \ \ Standard forwarding until accepted\\
+			& \ \ \ \ \ \ \ Standard forwarding until accepted\\
 			& \textit{if grouped}:\\
-			& \ \ \ \ \ Standard forwarding for 3 minutes\\
-			& \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
-			& \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
+			& \ \ \ \ \ \ \ Standard forwarding for 3 minutes\\
+			& \ \ \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
+			& \ \ \ \ \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
 			\hline\\
 			\multirow{8}{15em}{Reserved\&Shared $RR_z$}
 			& \textit{(at $RR_z.startDate - 10 minutes$)}\\
 			& apply Grouping algorithm \textit{(up to 1 minute)}\\
 			& \textit{if non-grouped}:\\
-			& \ \ \ \ \ Standard forwarding until accepted\\
+			& \ \ \ \ \ \ \ Standard forwarding until accepted\\
 			& \textit{if grouped}:\\
-			& \ \ \ \ \ Standard forwarding for 3 minutes\\
-			& \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
-			& \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
+			& \ \ \ \ \ \ \ Standard forwarding for 3 minutes\\
+			& \ \ \ \ \ \ \ \textit{if not accepted within 3 minutes}:\\
+			& \ \ \ \ \ \ \ \ \ \ \ \ \ \ repeat from beginning*\\ [1.5ex]
 			\hline
 		\end{tabular}
 	\end{center}
