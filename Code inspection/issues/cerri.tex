@@ -1,0 +1,164 @@
+
+\section*{doLoadFromFile( )}
+
+\lstset{firstnumber=465}
+\begin{lstlisting}
+private void doLoadFromFile() throws ClassNotFoundException, IOException {
+	if (log.isLoggable(Level.FINE)) {
+		log.log(Level.FINE, "Start: Loading persisted sessions");
+	}
+
+	// Open an input stream to the specified pathname, if any
+	File file = file();
+	if (file == null || !file.exists() || file.length() == 0) {
+		return;
+	}
+	if (log.isLoggable(Level.FINE)) {
+		String msg = MessageFormat.format(rb.getString(LOADING_PERSISTED_SESSION), pathname);
+		log.log(Level.FINE, msg);
+	}
+	FileInputStream fis = null;
+	try {
+		fis = new FileInputStream(file.getAbsolutePath());
+		readSessions(fis);
+		if (log.isLoggable(Level.FINE)) {
+			log.log(Level.FINE, "Finish: Loading persisted sessions");
+		}
+	} catch (FileNotFoundException e) {
+		if (log.isLoggable(Level.FINE)) {
+			log.log(Level.FINE, "No persisted data file found");
+		}
+	} finally {
+	try {
+		if (fis != null) {
+			fis.close();
+		}
+	} catch (IOException f) {
+		// ignore
+	}
+	// Delete the persistent storage file
+	deleteFile(file);
+	}
+}
+
+\end{lstlisting}
+
+\paragraph{Problems}
+\begin{enumerate}
+	\item @ 495 catch not managed [53]
+\end{enumerate}
+
+\paragraph{Other Problems}
+There is one main problem that must be fixed in order to have an easier debug:
+
+\begin{enumerate}
+	\item the catch statement @line 495 must be managed
+\end{enumerate}
+
+
+\section*{readSessions(InputStream is)}
+
+
+
+\lstset{firstnumber=519}
+\begin{lstlisting}
+public void readSessions(InputStream is)
+		throws ClassNotFoundException, IOException {
+
+	// Initialize our internal data structures
+	sessions.clear();
+
+	ObjectInputStream ois = null;
+	try {
+		BufferedInputStream bis = new BufferedInputStream(is);
+		if (container != null) {
+			ois = ((StandardContext)container).createObjectInputStream(bis);
+		} else {
+			ois = new ObjectInputStream(bis);
+		}
+	} catch (IOException ioe) {
+		String msg = MessageFormat.format(rb.getString(LOADING_PERSISTED_SESSION_IO_EXCEPTION),
+										      ioe);
+
+		log.log(Level.SEVERE, msg, ioe);
+		if (ois != null) {
+			try {
+				ois.close();
+			} catch (IOException f) {
+				// Ignore
+			}
+			ois = null;
+		}
+		throw ioe;
+	}
+
+	synchronized (sessions) {
+		try {
+			Integer count = (Integer) ois.readObject();
+			int n = count.intValue();
+			if (log.isLoggable(Level.FINE))
+				log.log(Level.FINE, "Loading " + n + " persisted sessions");
+			for (int i = 0; i < n; i++) {
+				StandardSession session =
+					StandardSession.deserialize(ois, this);
+				session.setManager(this);
+				sessions.put(session.getIdInternal(), session);
+				session.activate();
+			}
+		} catch (ClassNotFoundException e) {
+			String msg = MessageFormat.format(rb.getString(CLASS_NOT_FOUND_EXCEPTION),
+												  e);
+			log.log(Level.SEVERE, msg, e);
+			if (ois != null) {
+				try {
+					ois.close();
+				} catch (IOException f) {
+					// Ignore
+				}
+				ois = null;
+			}
+			throw e;
+		} catch (IOException e) {
+			String msg = MessageFormat.format(rb.getString(LOADING_PERSISTED_SESSION_IO_EXCEPTION),
+												  e);
+		  log.log(Level.SEVERE, msg, e);
+			if (ois != null) {
+				try {
+					ois.close();
+				} catch (IOException f) {
+					// Ignore
+				}
+				ois = null;
+			}
+			throw e;
+		} finally {
+			// Close the input stream
+			try {
+				if (ois != null) {
+					ois.close();
+			}
+			} catch (IOException f) {
+				// ignore
+			}
+		}
+	}
+}
+
+\end{lstlisting}
+
+\paragraph{Problems}
+\begin{enumerate}
+	\item @ 578 two spaces instead of four are used for indentation [8]
+	\item @ 553-4 the if statement is not surronded by curly braces [11]
+	\item @ 552 NullPointerException is not caught [52]
+	\item @ 541, @ 569, @ 582, @ 594 catch not managed [53]
+\end{enumerate} 
+
+\paragraph{Other Problems}
+
+There are two main problems that must be fixed in order to avoid some bugs:
+
+\begin{enumerate}
+	\item the catch statement @ 541, @ 569, @ 582, @ 594 must be managed
+	\item there is a dead code @ 538-545; the variable ois, @ 538, is null so the rest of the code is never executed
+\end{enumerate} 
