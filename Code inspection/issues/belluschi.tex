@@ -1,0 +1,64 @@
+\section*{setContainer(Container container)}
+	
+	\lstset{firstnumber=252}
+	\begin{lstlisting}
+		@Override
+		public void setContainer(Container container) {
+		
+			// De-register from the old Container (if any)
+			if ((this.container != null) && (this.container instanceof Context))
+				((Context) this.container).removePropertyChangeListener(this);
+			
+			// Default processing provided by our superclass
+			super.setContainer(container);
+			
+			// Register with the new Container (if any)
+			if ((this.container != null) && (this.container instanceof Context)) {
+				setMaxInactiveIntervalSeconds
+					( ((Context) this.container).getSessionTimeout()*60 );
+				((Context) this.container).addPropertyChangeListener(this);
+			}
+		
+		}
+	\end{lstlisting}
+
+	\paragraph{Problems}
+	\begin{enumerate}
+		\item @ 256: missing curly braces surrounding the \textit{if} statement [11]
+		\item @ 264: line break does not occur after a comma or an operator [15]
+	\end{enumerate}
+	
+	There are no major or critical problems.
+
+\section*{load()}
+
+	\lstset{firstnumber=435}
+	\begin{lstlisting}
+	public void load() throws ClassNotFoundException, IOException {
+		if (SecurityUtil.isPackageProtectionEnabled()){   
+			try{
+				AccessController.doPrivileged(new PrivilegedDoLoadFromFile());
+			} catch (PrivilegedActionException ex){
+				Exception exception = ex.getException();
+				if (exception instanceof ClassNotFoundException){
+					throw (ClassNotFoundException)exception;
+				} else if (exception instanceof IOException) {
+					throw (IOException)exception;
+				}
+				if (log.isLoggable(Level.FINE)) {
+					log.log(Level.FINE, "Unreported exception in load() "
+							+ exception);
+				}
+			}
+		} else {
+			doLoadFromFile();
+		}       
+	}
+	\end{lstlisting}
+
+	\paragraph{Problems}
+	\begin{enumerate}
+		\item @ 447: line break does not occur after a comma or an operator [15]
+	\end{enumerate}
+	
+	There are no major or critical problems.
