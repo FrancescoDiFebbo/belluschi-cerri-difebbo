@@ -1,0 +1,32 @@
+The class inspected is \textbf{StandardManager}.\\It belongs to the package \textit{org.apache.catalina.session}\\
+The class inheritance is the following:
+\begin{verbatim}
+java.lang.Object
+    org.apache.catalina.session.ManagerBase
+        org.apache.catalina.session.StandardManager
+\end{verbatim}
+
+Implemented interfaces are:
+\begin{verbatim}
+PropertyChangeListener, EventListener, Lifecycle, Manager
+\end{verbatim}
+
+\begin{lstlisting}
+/**
+* Standard implementation of the <b>Manager</b> interface that provides
+* simple session persistence across restarts of this component (such as
+* when the entire server is shut down and restarted, or when a particular
+* web application is reloaded.
+* <p>
+* <b>IMPLEMENTATION NOTE</b>:  Correct behavior of session storing and
+* reloading depends upon external calls to the <code>start()</code> and
+* <code>stop()</code> methods of this class at the correct times.
+*
+* @author Craig R. McClanahan
+* @author Jean-Francois Arcand
+* @version $Revision: 1.14.6.2 $ $Date: 2008/04/17 18:37:20 $
+*/
+\end{lstlisting}
+\paragraph{Functionality} StandardManager inherits from ManagerBase, a minimal implementation of the Manager interface that supports no session persistence or distributable capabilities. On the contrary, StandardManager manages the persistence of sessions when occurs start or stop events on the component. Lifecycle interface is responsible for component lifecycle methods. Components may implement this interface in order to provide a consistent mechanism to start and stop the components.
+
+

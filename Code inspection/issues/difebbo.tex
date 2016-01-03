@@ -1,6 +1,18 @@
 \section*{unload(boolean doExpire, boolean isShutdown)}
-\lstset{firstnumber=506}
+\lstset{firstnumber=626}
 \begin{lstlisting}
+/**
+* Save any currently active sessions in the appropriate persistence
+* mechanism, if any.  If persistence is not supported, this method
+* returns without doing anything.
+*
+* @doExpire true if the unloaded sessions are to be expired, false
+* otherwise
+* @param isShutdown true if this manager is being stopped as part of a
+* domain shutdown (as opposed to an undeployment), and false otherwise
+*
+* @exception IOException if an input/output error occurs
+*/ 
 protected void unload(boolean doExpire, boolean isShutdown) throws IOException {
 	if (SecurityUtil.isPackageProtectionEnabled()){       
 		try {
@@ -21,13 +33,21 @@ protected void unload(boolean doExpire, boolean isShutdown) throws IOException {
 \end{lstlisting}
 \paragraph{Problems}
 \begin{enumerate}
-	\item "If" statement isn't surrounded by curly braces @ 516 [11].
-	\item issues vari vari vari
+	\item @ 631: the description of first parameter is badly written. Instead it has to be written like this: \textbf{@param doExpire} true if the unloaded sessions are to be expired, false otherwise [23]
+	\item @ 649: missing curly braces surrounding the \textit{if} statement [11]
 \end{enumerate}
 
 \section*{doUnload(boolean doExpire, boolean isShutdown)}
-\lstset{firstnumber=665}
+\lstset{firstnumber=657}
 \begin{lstlisting}
+/**
+* Saves any currently active sessions to file.
+*
+* @doExpire true if the unloaded sessions are to be expired, false
+* otherwise
+*
+* @exception IOException if an input/output error occurs
+*/
 private void doUnload(boolean doExpire, boolean isShutdown) throws IOException {
 	if(isShutdown) {
 		if(log.isLoggable(Level.FINE)) {
@@ -72,7 +92,14 @@ private void doUnload(boolean doExpire, boolean isShutdown) throws IOException {
 \end{lstlisting}
 \paragraph{Problems}
 \begin{enumerate}
-	\item "If" statement isn't surrounded by curly braces @ 516 [11].
-	\item issues vari vari vari
+	\item @ 660: the description of first parameter is badly written. Instead it should be written like this: \textbf{@param doExpire} true if the unloaded sessions are to be expired, false otherwise [23]
+	\item Javadoc is not complete. It misses of second parameter description [23]
+	\item @ 689, @ 700: exception not handled. The catch block is empty. The exception should be either logged or rethrown [53]
+\end{enumerate}
+
+\paragraph{Other problems}
+\begin{enumerate}
+	\item @ 678: resources 'fos' should be managed by try-with-resource
+	\item @ 690: useless empty statement	
 \end{enumerate}
 
