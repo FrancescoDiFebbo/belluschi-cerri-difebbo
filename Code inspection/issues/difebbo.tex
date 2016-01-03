@@ -1,70 +1,78 @@
-\section*{unload(boolean doExpire , boolean isShutdown)}
-\subsection*{Naming conventions}
-
-\subsection*{Indention}
-
-\subsection*{File organization}
-
-\subsection*{Wrapping lines}
-
-\subsection*{Comments}
-
-\subsection*{Java source files}
-
-\subsection*{Package and import statements}
-
-\subsection*{Class and interface declaration}
-
-\subsection*{Initialization and declarations}
-
-\subsection*{Method calls}
-
-\subsection*{Arrays}
-
-\subsection*{Object comparison}
-
-\subsection*{Output format}
-
-\subsection*{Computation, comparisons and assignments}
-
-\subsection*{Exceptions}
-
-\subsection*{Flow of control}
-
-\subsection*{Files}
+\section*{unload(boolean doExpire, boolean isShutdown)}
+\lstset{firstnumber=506}
+\begin{lstlisting}
+protected void unload(boolean doExpire, boolean isShutdown) throws IOException {
+	if (SecurityUtil.isPackageProtectionEnabled()){       
+		try {
+			AccessController.doPrivileged(
+				new PrivilegedDoUnload(doExpire, isShutdown));
+		} catch (PrivilegedActionException ex){
+			Exception exception = ex.getException();
+			if (exception instanceof IOException){
+				throw (IOException)exception;
+			}
+			if (log.isLoggable(Level.FINE))
+				log.log(Level.FINE, "Unreported exception in unLoad() " + exception);
+		}
+	} else {
+		doUnload(doExpire, isShutdown);
+	}       
+}
+\end{lstlisting}
+\paragraph{Problems}
+\begin{enumerate}
+	\item "If" statement isn't surrounded by curly braces @ 516 [11].
+	\item issues vari vari vari
+\end{enumerate}
 
 \section*{doUnload(boolean doExpire, boolean isShutdown)}
+\lstset{firstnumber=665}
+\begin{lstlisting}
+private void doUnload(boolean doExpire, boolean isShutdown) throws IOException {
+	if(isShutdown) {
+		if(log.isLoggable(Level.FINE)) {
+			log.log(Level.FINE, "Unloading persisted sessions");
+		}
+		// Open an output stream to the specified pathname, if any
+		File file = file();
+		if(file == null || !isDirectoryValidFor(file.getAbsolutePath())) {
+			return;
+		}
+		if(log.isLoggable(Level.FINE)) {
+			log.log(Level.FINE, SAVING_PERSISTED_SESSION, pathname);
+		}
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file.getAbsolutePath());
+			writeSessions(fos, doExpire);
+			if(log.isLoggable(Level.FINE)) {
+				log.log(Level.FINE, "Unloading complete");
+			}
+		} catch(IOException ioe) {
+			if(fos != null) {
+				try {
+					fos.close();
+				} catch(IOException f) {
+					;
+				}
+				fos = null;
+			}
+			throw ioe;
+		} finally {
+			try {
+				if(fos != null) {
+					fos.close();
+				}
+			} catch(IOException f) {
+				// ignore
+			}
+		}
+	}
+}
+\end{lstlisting}
+\paragraph{Problems}
+\begin{enumerate}
+	\item "If" statement isn't surrounded by curly braces @ 516 [11].
+	\item issues vari vari vari
+\end{enumerate}
 
-\subsection*{Naming conventions}
-
-\subsection*{Indention}
-
-\subsection*{File organization}
-
-\subsection*{Wrapping lines}
-
-\subsection*{Comments}
-
-\subsection*{Java source files}
-
-\subsection*{Package and import statements}
-
-\subsection*{Class and interface declaration}
-
-\subsection*{Initialization and declarations}
-
-\subsection*{Method calls}
-
-\subsection*{Arrays}
-
-\subsection*{Object comparison}
-
-\subsection*{Output format}
-
-\subsection*{Computation, comparisons and assignments}
-
-\subsection*{Exceptions}
-
-\subsection*{Flow of control}
-
-\subsection*{Files}
