@@ -1,8 +1,16 @@
 
 \section*{doLoadFromFile( )}
 
-\lstset{firstnumber=465}
+\lstset{firstnumber=457}
 \begin{lstlisting}
+ /**
+ * Loads any currently active sessions that were previously unloaded
+ * to file
+ *
+ * @exception ClassNotFoundException if a serialized class cannot be
+ * found during the reload
+ * @exception IOException if a read error occurs
+ */
 private void doLoadFromFile() throws ClassNotFoundException, IOException {
 	if (log.isLoggable(Level.FINE)) {
 		log.log(Level.FINE, "Start: Loading persisted sessions");
@@ -60,8 +68,18 @@ There is one main problem that must be fixed in order to have an easier debug:
 
 
 
-\lstset{firstnumber=519}
+\lstset{firstnumber=509}
 \begin{lstlisting}
+/*
+* Reads any sessions from the given input stream, and initializes the
+* cache of active sessions with them.
+*
+* @param is the input stream from which to read the sessions
+*
+* @exception ClassNotFoundException if a serialized class cannot be
+* found during the reload
+* @exception IOException if a read error occurs
+*/
 public void readSessions(InputStream is)
 		throws ClassNotFoundException, IOException {
 
@@ -150,7 +168,6 @@ public void readSessions(InputStream is)
 \begin{enumerate}
 	\item @ 578 two spaces instead of four are used for indentation [8]
 	\item @ 553-4 the if statement is not surronded by curly braces [11]
-	\item @ 552 NullPointerException is not caught [52]
 	\item @ 541, @ 569, @ 582, @ 594 catch not managed [53]
 \end{enumerate} 
 
