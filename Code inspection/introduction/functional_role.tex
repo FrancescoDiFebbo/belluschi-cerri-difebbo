@@ -27,7 +27,7 @@ PropertyChangeListener, EventListener, Lifecycle, Manager
 * @version $Revision: 1.14.6.2 $ $Date: 2008/04/17 18:37:20 $
 */
 \end{lstlisting}
-\paragraph{Description} StandardManager inherits from ManagerBase, a minimal implementation of the Manager interface that supports no session persistence or distributable capabilities. On the contrary, StandardManager manages the persistence of sessions when occurs start or stop events on the component. Lifecycle interface is responsible for component lifecycle methods. Components may implement this interface in order to provide a consistent mechanism to start and stop the components.\\\\\\
+\paragraph{Description} \textit{StandardManager} inherits from \textit{ManagerBase}, a minimal implementation of the \textit{Manager} interface that supports no session persistence or distributable capabilities. On the contrary, \textit{StandardManager} manages the persistence of sessions when occurs start or stop events on the component. \textit{Lifecycle} interface is responsible for component lifecycle methods. Components may implement this interface in order to provide a consistent mechanism to start and stop the components. \textit{PropertyChangeListener} interface is responsible for \textit{PropertyChange} events handling whenever a bean changes a "bound" property.\\\\\\
 
 
 
@@ -45,7 +45,7 @@ PropertyChangeListener, EventListener, Lifecycle, Manager
 public void setContainer(Container container)
 \end{lstlisting}
 
-\paragraph{Description} This method overrides ManagersBase's \textit{setContainer} method. In particular, it de-registers from any pre-existing, Context Container through the \textit{removePropertyChangeListener} method. In any case, the method then proceeds calling the superclass \textit{setContainer} method. Finally, if the Container argument that was passed is a non-null Context, the method registers with it through the \textit{addPropertyChangeListener} method.\\\\\\
+\paragraph{Description} This method overrides \textit{ManagersBase}'s \textit{setContainer} method. In particular, it de-registers from any pre-existing, \textit{Context Container} through the \textit{removePropertyChangeListener} method. In any case, the method then proceeds calling the superclass \textit{setContainer} method. Finally, if the \textit{Container} argument that was passed is a non-null \textit{Context}, the method registers with it through the \textit{addPropertyChangeListener} method.\\\\\\
 
 
 \title{{\large \textbf{load( )}}}
@@ -63,7 +63,7 @@ public void setContainer(Container container)
 public void load() throws ClassNotFoundException, IOException
 \end{lstlisting}
 
-\paragraph{Description} This method requires persistence support (verifying it through the \textit{SecurityUtil.isPackageProtectionEnabled} method), otherwise simply calls \textit{doLoadFromFile}. The method looks for and loads all previously unloaded active sessions: it tries the AccessController.doPrivileged method, catching exceptions \textit{ClassNotFoundException}, \textit{IOException} and reporting all other unexpected ones. \\\\\\
+\paragraph{Description} This method requires persistence support (verifying it through the \textit{SecurityUtil.isPackageProtectionEnabled()} method), otherwise simply calls \textit{doLoadFromFile}. The method looks for and loads all previously unloaded active sessions: it tries the \textit{AccessController.doPrivileged(PrivilegedExceptionAction$\langle T \rangle$)} method, catching exceptions \textit{ClassNotFoundException}, \textit{IOException} and reporting all other unexpected ones. \\\\\\
 
 
 \title{{\large \textbf{doLoadFromFile( )}}}
@@ -80,7 +80,7 @@ public void load() throws ClassNotFoundException, IOException
 private void doLoadFromFile() throws ClassNotFoundException, IOException 
 \end{lstlisting}
 
-\paragraph{Description} This method loads persisted session from an existing file. If the file returned by the file() method doesn't exist, is empty or is null the method returns and no operations are performed. Otherwise a FileInputSession fis is open with parameter the absolutePath of the file. If no exceptions are caught the method invokes the readSession(fis) otherwise a error message is shown by the logger. In any case the method closes the FileInputStream and if there are no other exceptions the method deletes the file.\\\\\\
+\paragraph{Description} This method loads persisted session from an existing file. If the file returned by the \textit{file()} method doesn't exist, is empty or is null the method returns and no operations are performed. Otherwise a \textit{FileInputSession fis} is open with parameter the \textit{absolutePath} of the file. If no exceptions are caught the method invokes the \textit{readSession(fis)} otherwise a error message is shown by the logger. In any case the method closes the \textit{FileInputStream} and if there are no other exceptions the method deletes the file.\\\\\\
 
 
 \title{{\large \textbf{readSessions(InputStream is)}}}
@@ -100,7 +100,7 @@ public void readSessions(InputStream is)
 throws ClassNotFoundException, IOException
 \end{lstlisting}
 
-\paragraph{Description} This method reads any session from the parameter is (ImputStream object). First of all the method initializes the class variable sessions. Then, the method, creates a ObjectInputStream ois and try to initialize it with a BufferedInputStream bis from the InputStream is (the parameter of the method). If an IOException is caught the method shows an error through the logger and then try to close the ObjectInputStream ois created. Then the class variable sessions is synchronized and the method try to load the persisted sessions and create a object session from the class StardardSession and put it in the sessions class variable and activates it. In any case the method closes the ObjectInputStream and terminates.\\\\\\
+\paragraph{Description} This method reads any session from the parameter \textit{is} (\textit{InputStream} object). First of all the method initializes the class variable sessions. Then, the method, creates a \textit{ObjectInputStream ois} and try to initialize it with a \textit{BufferedInputStream bis} from the \textit{InputStream is} (the parameter of the method). If an \textit{IOException} is caught the method shows an error through the logger and then try to close the \textit{ObjectInputStream ois} created. Then the class variable sessions is synchronized and the method try to load the persisted sessions and create a object session from the class \textit{StardardSession} and put it in the sessions class variable and activates it. In any case the method closes the \textit{ObjectInputStream} and terminates.\\\\\\
 
 
 \title{{\large \textbf{unload(boolean doExpire, boolean isShutDown)}}}
@@ -120,7 +120,7 @@ throws ClassNotFoundException, IOException
 */
 protected void unload(boolean doExpire, boolean isShutdown) throws IOException
 \end{lstlisting}
-\paragraph{Description} This method checks if package protection mechanism is enabled. If so doUnload(boolean, boolean) method is performed with privileges enabled by AccessController.doPrivileged(PrivilegedExceptionAction$\langle T \rangle$) method. If the action's method throws an exception, it will propagate through the latter method. Otherwise doUnload(boolean, boolean) method is simply executed. If an exception occurs, it will be rethrown without handling.\\\\\\
+\paragraph{Description} This method checks if package protection mechanism is enabled through \textit{SecurityUtil.isPackageProtectionEnabled()} method. If so \textit{doUnload(boolean, boolean)} method is performed with privileges enabled through \textit{AccessController} \textit{.doPrivileged(PrivilegedExceptionAction$\langle T \rangle$)} method. If the action's method throws an exception, it will propagate through the latter method. Otherwise \textit{doUnload(boolean, boolean)} method is simply executed. If an exception occurs, it will be rethrown without handling.\\\\\\
 
 \title{{\large \textbf{doUnload(boolean doExpire, boolean isShutdown)}}}
 \lstset{firstnumber=657}
@@ -135,5 +135,5 @@ protected void unload(boolean doExpire, boolean isShutdown) throws IOException
 */
 private void doUnload(boolean doExpire, boolean isShutdown) throws IOException
 \end{lstlisting}
-\paragraph{Description} This method checks isShutDown parameter. If it's true the session is saved. A new file (through file() method) and its output stream are opened. On this output stream are written all active sessions through writeSession(OutputStream, boolean) method. If isShutDown is false or file is not valid or an exception occurs sessions will not be written.
+\paragraph{Description} This method checks \textit{isShutDown} parameter. If it's true the session is saved. A new file (through \textit{file()} method) and its output stream are opened. On this output stream are written all active sessions through \textit{writeSession(OutputStream, boolean)} method. If \textit{isShutDown} is false or file is not valid or an exception occurs sessions will not be written.
 
