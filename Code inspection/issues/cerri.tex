@@ -57,10 +57,11 @@ private void doLoadFromFile() throws ClassNotFoundException, IOException {
 \end{enumerate}
 
 \paragraph{Other Problems}
-There is one main problem that must be fixed in order to have an easier debug:
+There is two main problem that must be fixed in order to have an easier debug:
 
 \begin{enumerate}
-	\item the catch statement @line 495 must be managed
+	\item the catch statement @ 495 must be managed
+	\item @ 473 is better to use the log to inform the caller that the method returns without perform any operation
 \end{enumerate}
 
 
@@ -168,14 +169,16 @@ public void readSessions(InputStream is)
 \begin{enumerate}
 	\item @ 578 two spaces instead of four are used for indentation [8]
 	\item @ 553-4 the if statement is not surronded by curly braces [11]
+	\item @ 566-573, @ 579-586, @590-596 duplicated code [27]
 	\item @ 541, @ 569, @ 582, @ 594 catch not managed [53]
 \end{enumerate} 
 
 \paragraph{Other Problems}
 
-There are two main problems that must be fixed in order to avoid some bugs:
+There are three main problems that must be fixed in order to avoid some bugs:
 
 \begin{enumerate}
+	\item the duplicated code  @ 566-573, @ 579-586 can be deleted because the finally statement does the same thing
 	\item the catch statement @ 541, @ 569, @ 582, @ 594 must be managed
 	\item there is a dead code @ 538-545; the variable ois, @ 538, is null so the rest of the code is never executed
 \end{enumerate} 

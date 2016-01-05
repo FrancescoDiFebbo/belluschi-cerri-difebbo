@@ -29,6 +29,46 @@ PropertyChangeListener, EventListener, Lifecycle, Manager
 \end{lstlisting}
 \paragraph{Description} StandardManager inherits from ManagerBase, a minimal implementation of the Manager interface that supports no session persistence or distributable capabilities. On the contrary, StandardManager manages the persistence of sessions when occurs start or stop events on the component. Lifecycle interface is responsible for component lifecycle methods. Components may implement this interface in order to provide a consistent mechanism to start and stop the components.\\
 
+
+
+
+\title{{\large \textbf{doLoadFromFile( )}}}
+\lstset{firstnumber=457}
+\begin{lstlisting}
+/**
+* Loads any currently active sessions that were previously unloaded
+* to file
+*
+* @exception ClassNotFoundException if a serialized class cannot be
+* found during the reload
+* @exception IOException if a read error occurs
+*/
+private void doLoadFromFile() throws ClassNotFoundException, IOException 
+\end{lstlisting}
+
+\paragraph{Description} This method loads persisted session from an existing file. If the file returned by the file() method doesn't exist, is empty or is null the method returns and no operations are performed. Otherwise a FileInputSession fis is open with parameter the absolutePath of the file. If no exceptions are caught the method invokes the readSession(fis) otherwise a error message is shown by the logger. In any case the method closes the FileInputStream and if there are no other exceptions the method deletes the file.\\\\\\
+
+
+\title{{\large \textbf{readSessions(InputStream is)}}}
+\lstset{firstnumber=509}
+\begin{lstlisting}
+/*
+* Reads any sessions from the given input stream, and initializes the
+* cache of active sessions with them.
+*
+* @param is the input stream from which to read the sessions
+*
+* @exception ClassNotFoundException if a serialized class cannot be
+* found during the reload
+* @exception IOException if a read error occurs
+*/
+public void readSessions(InputStream is)
+throws ClassNotFoundException, IOException
+\end{lstlisting}
+
+\paragraph{Description} This method reads any session from the parameter is (ImputStream object). First of all the method initializes the class variable sessions. Then, the method, creates a ObjectInputStream ois and try to initialize it with a BufferedInputStream bis from the InputStream is (the parameter of the method). If an IOException is caught the method shows an error through the logger and then try to close the ObjectInputStream ois created. Then the class variable sessions is synchronized and the method try to load the persisted sessions and create a object session from the class StardardSession and put it in the sessions class variable and activates it. In any case the method closes the ObjectInputStream and terminates.\\\\
+
+
 \title{{\large \textbf{unload(boolean doExpire, boolean isShutDown)}}}
 \lstset{firstnumber=626}
 \begin{lstlisting}
