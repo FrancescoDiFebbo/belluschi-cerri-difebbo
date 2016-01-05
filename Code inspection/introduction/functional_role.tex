@@ -86,7 +86,7 @@ throws ClassNotFoundException, IOException
 */
 protected void unload(boolean doExpire, boolean isShutdown) throws IOException
 \end{lstlisting}
-\paragraph{Description} This method checks if package protection mechanism is enabled. If so doUnload(boolean, boolean) method is performed with privileges enabled by AccessController.doPrivileged(PrivilegedExceptionAction$\langle T \rangle$) method. If the action's method throws an exception, it will propagate through the latter method. Otherwise doUnload(boolean, boolean) method is simply executed. If an exception occurs, it will be rethrown without handling.
+\paragraph{Description} This method checks if package protection mechanism is enabled. If so doUnload(boolean, boolean) method is performed with privileges enabled by AccessController.doPrivileged(PrivilegedExceptionAction$\langle T \rangle$) method. If the action's method throws an exception, it will propagate through the latter method. Otherwise doUnload(boolean, boolean) method is simply executed. If an exception occurs, it will be rethrown without handling.\\
 
 \title{{\large \textbf{doUnload(boolean doExpire, boolean isShutdown)}}}
 \lstset{firstnumber=657}
@@ -101,5 +101,5 @@ protected void unload(boolean doExpire, boolean isShutdown) throws IOException
 */
 private void doUnload(boolean doExpire, boolean isShutdown) throws IOException
 \end{lstlisting}
-\paragraph{Description} This method checks isShutDown parameter. If it's true the session is saved. A new file (through file() method) and its output stream are opened. On this output stream are written all active sessions through writeSession(OutputStream, boolean) method. If isShutDown is false or file is not valid or an exception occurs sessions will not be written
+\paragraph{Description} This method checks isShutDown parameter. If it's true the session is saved. A new file (through file() method) and its output stream are opened. On this output stream are written all active sessions through writeSession(OutputStream, boolean) method. If isShutDown is false or file is not valid or an exception occurs sessions will not be written.
 
