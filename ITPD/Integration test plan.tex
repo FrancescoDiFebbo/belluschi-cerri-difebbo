@@ -1,0 +1,68 @@
+\documentclass[]{report}
+\usepackage{hyperref}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+
+\title{{\Huge\textit{myTaxiService}}\\{\Large Integration test plan document}}
+\author{Belluschi Marco 791878, Cerri Stefano 849945, Di Febbo Francesco 852389}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+
+	\section{Revision history}
+	\input{introduction/revision_history.tex}
+
+	\section{Purpose and scope}
+	\input{introduction/purpose_and_scope.tex}
+
+	\section{List of definitions and abbreviations}
+	\input{introduction/definitions_and_abbreviations.tex}
+
+	\section{List of reference documents}
+	\input{introduction/reference_documents.tex}
+
+\chapter{Integration strategy}
+
+	\section{Entry criteria}
+	\input{integration_strategy/entry_criteria.tex}
+
+	\section{Elements to be integrated}
+	\input{integration_strategy/elements_tb_integrated.tex}
+
+	\section{Integration testing strategy}
+	\input{integration_strategy/integration_testing_strategy.tex}
+
+	\section{Sequence of component/function integration}
+	\input{integration_strategy/function_integration.tex}
+	
+		\subsection{Software integration sequence}
+		\input{integration_strategy/software_integration.tex}
+	
+		\subsection{Subsystem integration sequence}
+		\input{integration_strategy/subsystem_integration.tex}
+
+\chapter{Individual steps and test description}
+\input{chapters/individual_steps_and_test_description.tex}
+
+\chapter{Tools and test equipment required}
+\input{chapters/tools_and_test_equipment.tex}
+
+\chapter{Program stubs and test data required}
+\input{chapters/program_stubs_and_test_data.tex}
+
+\appendix
+
+\chapter{Appendix}
+
+	\section{Software and tool used}
+	\input{appendix/software_and_tools.tex}
+
+	\section{Working hours}
+	\input{appendix/hours_of_works.tex}
+
+\end{document}
+       
