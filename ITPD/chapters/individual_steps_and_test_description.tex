@@ -1,0 +1,289 @@
+\section{Individual Step and Test Description}
+  
+   \subsection{Test Case I1}
+   \begin{table}[ht!]
+   	\begin{tabular*}{16cm}{ll}
+   		\hline
+   		\textbf{Test Item(s)} & Data Manager $ \longleftrightarrow $ DBMS  \\
+   		\hline
+   		\textbf{Input Specification} & \pbox{20cm}{Queries on the DBMS for the Table User, Passenger, Taxi Driver and Ride}\\
+   		\hline
+   		\textbf{Output Specification} & \pbox{20cm}{The queries return the expected results}\\
+   		\hline
+   		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database}\\
+   		\hline
+   		\textbf{Purpose} & \pbox{20cm}{Verify that the typical queries to the DBMS works} \\
+   		\hline
+   	\end{tabular*}
+   \end{table}
+   
+    \subsection{Test Case I2}
+    \begin{table}[ht!]
+    	\begin{tabular*}{16cm}{ll}
+    		\hline
+    		\textbf{Test Item(s)} & Data Manager $ \longleftrightarrow $ Account Manager   \\
+    		\hline
+    		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Data Manager to retrieve user information }\\
+    		\hline
+    		\textbf{Output Specification} & \pbox{20cm}{Check that the user information are correct }\\
+    		\hline
+    		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database, I1 successful}\\
+    		\hline
+    		\textbf{Purpose} & \pbox{20cm}{Verify that the user information are retrieved from the Data Manager} \\
+    		\hline
+    	\end{tabular*}
+    \end{table}
+    
+    \newpage
+     \subsection{Test Case I3}
+     \begin{table}[ht!]
+     	\begin{tabular*}{16cm}{ll}
+     		\hline
+     		\textbf{Test Item(s)} & Data Manager $ \longleftrightarrow $  Ride Manager \\
+     		\hline
+     		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Data Manager to retrieve reserved \\ ride information}\\
+     		\hline
+     		\textbf{Output Specification} & \pbox{20cm}{Check that the reserved ride information are correct}\\
+     		\hline
+     		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database, I1 successful}\\
+     		\hline
+     		\textbf{Purpose} & \pbox{20cm}{Verify that the reserved ride information are retrieved from \\ the Data Manager} \\
+     		\hline
+     	\end{tabular*}
+     \end{table}
+     
+      \subsection{Test Case I4}
+      \begin{table}[ht!]
+      	\begin{tabular*}{16cm}{ll}
+      		\hline
+      		\textbf{Test Item(s)} & Data Manager $ \longleftrightarrow $ Map Service Manager  \\
+      		\hline
+      		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Data Manager to retrieve zone information }\\
+      		\hline
+      		\textbf{Output Specification} & \pbox{20cm}{Check that the zone information are correct}\\
+      		\hline
+      		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database, I1 successful}\\
+      		\hline
+      		\textbf{Purpose} & \pbox{20cm}{Verify that the zone information are retrieved from the Data Manager} \\
+      		\hline
+      	\end{tabular*}
+      \end{table}
+      
+       \subsection{Test Case I5}
+       \begin{table}[ht!]
+       	\begin{tabular*}{16cm}{ll}
+       		\hline
+       		\textbf{Test Item(s)} & Ride Request Manager $ \longleftrightarrow $ Ride Manager \\
+       		\hline
+       		\textbf{Input Specification} & \pbox{20cm}{A typical set of methods calls on Ride Manager in order to create a Ride}\\
+       		\hline
+       		\textbf{Output Specification} & \pbox{20cm}{Check if the correct Ride is created with the information from \\ Ride Request Manager}\\
+       		\hline
+       		\textbf{Environmental Needs} &  \pbox{20cm}{I2 successful}\\
+       		\hline
+       		\textbf{Purpose} & \pbox{20cm}{Create a Ride from a typical Ride Request} \\
+       		\hline
+       	\end{tabular*}
+       \end{table}
+       
+        \subsection{Test Case I6}
+        \begin{table}[ht!]
+        	\begin{tabular*}{16cm}{ll}
+        		\hline
+        		\textbf{Test Item(s)} & Ride Manager $ \longleftrightarrow $ Notification Manager  \\
+        		\hline
+        		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls in order to create a notification}\\
+        		\hline
+        		\textbf{Output Specification} & \pbox{20cm}{Check if the correct notification is created}\\
+        		\hline
+        		\textbf{Environmental Needs} &  \pbox{20cm}{I2 and I5 successful}\\
+        		\hline
+        		\textbf{Purpose} & \pbox{20cm}{The Notification Manager create the notification from the Ride Manager} \\
+        		\hline
+        	\end{tabular*}
+        \end{table}
+       
+ \newpage
+        
+         \subsection{Test Case I7}
+         \begin{table}[ht!]
+         	\begin{tabular*}{16cm}{ll}
+         		\hline
+         		\textbf{Test Item(s)} & Ride Manager $ \longleftrightarrow $ Taxi Queues Manager  \\
+         		\hline
+         		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Taxi Queues Manager }\\
+         		\hline
+         		\textbf{Output Specification} & \pbox{20cm}{Check if an available Taxi Driver is returned}\\
+         		\hline
+         		\textbf{Environmental Needs} &  \pbox{20cm}{I2 and I6 successful}\\
+         		\hline
+         		\textbf{Purpose} & \pbox{20cm}{Retrieve an available Taxi Driver} \\
+         		\hline
+         	\end{tabular*}
+         \end{table}
+   
+    \subsection{Test Case I8}
+    \begin{table}[ht!]
+    	\begin{tabular*}{16cm}{ll}
+    		\hline
+    		\textbf{Test Item(s)} & Map Services Manager $ \longleftrightarrow $ External APIs Manager  \\
+    		\hline
+    		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls by Map Services Manager \\ on External APIs Manager}\\
+    		\hline
+    		\textbf{Output Specification} & \pbox{20cm}{Check that all the methods of External APIs Manager produce \\ the expected results}\\
+    		\hline
+    		\textbf{Environmental Needs} &  \pbox{20cm}{N/A}\\
+    		\hline
+    		\textbf{Purpose} & \pbox{20cm}{Verify that the External APIs Manager works with the \\ Map Services Manager} \\
+    		\hline
+    	\end{tabular*}
+    \end{table}
+    
+         
+   \subsection{Test Case I9}
+   \begin{table}[ht!]
+   	\begin{tabular*}{16cm}{ll}
+   		\hline
+   		\textbf{Test Item(s)} & Ride Manager $ \longleftrightarrow $ Map Services Manager  \\
+   		\hline
+   		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Map Services Manager}\\
+   		\hline
+   		\textbf{Output Specification} & \pbox{20cm}{Verify that the returned route is the correct one}\\
+   		\hline
+   		\textbf{Environmental Needs} &  \pbox{20cm}{I5 and I8 successful}\\
+   		\hline
+   		\textbf{Purpose} & \pbox{20cm}{Compute the optimal route} \\
+   		\hline
+   	\end{tabular*}
+   \end{table}
+
+   \subsection{Test Case I10}
+   \begin{table}[ht!]
+   	\begin{tabular*}{16cm}{ll}
+   		\hline
+   		\textbf{Test Item(s)} & Taxi Queues Manager  $ \longleftrightarrow $ Map Services Manager    \\
+   		\hline
+   		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on Map Services Manager}\\
+   		\hline
+   		\textbf{Output Specification} & \pbox{20cm}{Verify that the position of the Taxi Driver is correct}\\
+   		\hline
+   		\textbf{Environmental Needs} &  \pbox{20cm}{I2 and I8 successful}\\
+   		\hline
+   		\textbf{Purpose} & \pbox{20cm}{Retrieve the position of a Taxi Driver in a Taxi Queue} \\
+   		\hline
+   	\end{tabular*}
+   \end{table}
+
+  
+   \newpage
+  
+  \subsection{Test Case I11}
+  \begin{table}[ht!]
+  	\begin{tabular*}{16cm}{ll}
+  		\hline
+  		\textbf{Test Item(s)} & Account Manager $ \longleftrightarrow $   Mobile App\\
+  		\hline
+  		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Mobile App \\ on Account Manager}\\
+  		\hline
+  		\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\ produce the expected results}\\
+  		\hline
+  		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
+  		\hline
+  		\textbf{Purpose} & \pbox{20cm}{Verifies if Account Manager can handle correctly \\ Mobile App methods calls} \\
+  		\hline
+  	\end{tabular*}
+  \end{table}
+  
+  \subsection{Test Case I12}
+  \begin{table}[ht!]
+  	\begin{tabular*}{16cm}{ll}
+  		\hline
+  		\textbf{Test Item(s)} & Ride Request Manager $ \longleftrightarrow $   Mobile App\\
+  		\hline
+  		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Mobile App \\ on Ride Request Manager}\\
+  		\hline
+  		\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\ produce the expected results}\\
+  		\hline
+  		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
+  		\hline
+  		\textbf{Purpose} & \pbox{20cm}{Verifies if Ride Request Manager can handle correctly \\ Mobile App methods calls} \\
+  		\hline
+  	\end{tabular*}
+  \end{table}
+  
+  
+  \subsection{Test Case I13}
+  \begin{table}[ht!]
+    \begin{tabular*}{16cm}{ll}
+	\hline
+	\textbf{Test Item(s)} & Notification Manager $ \longleftrightarrow $   Mobile App\\
+	\hline
+	\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Notification Manager \\ on Mobile App}\\
+	\hline
+	\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\ produce the expected results}\\
+	\hline
+	\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
+	\hline
+	\textbf{Purpose} & \pbox{20cm}{Verifies if Mobile App can handle
+		correctly Notification Manager \\ methods calls} \\
+	\hline
+    \end{tabular*}
+  \end{table}
+  
+  \newpage 
+  \subsection{Test Case I14}
+  \begin{table}[ht!]
+  	\begin{tabular*}{16cm}{ll}
+  		\hline
+  		\textbf{Test Item(s)} & Account Manager $ \longleftrightarrow $   Web App\\
+  		\hline
+  		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Web App \\ on Account Manager}\\
+  		\hline
+  		\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\ produce the expected results}\\
+  		\hline
+		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
+  		\hline
+  		\textbf{Purpose} & \pbox{20cm}{Verifies if Account Manager can handle correctly \\ Web App methods calls} \\
+  		\hline
+  	\end{tabular*}
+  \end{table}
+  
+      
+      \subsection{Test Case I15}
+      \begin{table}[ht!]
+      	\begin{tabular*}{16cm}{ll}
+      		\hline
+      		\textbf{Test Item(s)} & Ride Request Manager $ \longleftrightarrow $   Web App\\
+      		\hline
+      		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Web App \\ on Ride Request Manager}\\
+      		\hline
+      		\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\produce the expected results}\\
+		    \hline
+			\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
+			\hline
+      		\textbf{Purpose} & \pbox{20cm}{Verifies if Ride Request Manager can handle correctly \\ Web App methods calls} \\
+      		\hline
+      	\end{tabular*}
+      \end{table}
+      
+  
+  
+  \subsection{Test Case I16}
+  \begin{table}[ht!]
+  	\begin{tabular*}{16cm}{ll}
+  		\hline
+  		\textbf{Test Item(s)} & Notification Manager $ \longleftrightarrow $   Web App\\
+  		\hline
+  		\textbf{Input Specification} & \pbox{20cm}{Create a typical set of methods calls performed by Notification \\ on Web App}\\
+  		\hline
+  		\textbf{Output Specification} & \pbox{20cm}{Check if the methods calls mentioned in Input Specification \\ produce the expected results}\\
+  		\hline
+		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
+  		\hline
+  		\textbf{Purpose} & \pbox{20cm}{Verifies if Web App can handle correctly Notification methods calls} \\
+  		\hline
+  	\end{tabular*}
+  \end{table}
+
+
+
