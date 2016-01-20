@@ -98,7 +98,7 @@
         		\hline
         		\textbf{Environmental Needs} &  \pbox{20cm}{I2 and I5 successful}\\
         		\hline
-        		\textbf{Purpose} & \pbox{20cm}{The Notification Manager create the notification from the Ride Manager} \\
+        		\textbf{Purpose} & \pbox{20cm}{Verify that the Notification Manager create the notification from the Ride Manager} \\
         		\hline
         	\end{tabular*}
         \end{table}
@@ -189,7 +189,7 @@
   		\hline
   		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
   		\hline
-  		\textbf{Purpose} & \pbox{20cm}{Verifies if Account Manager can handle correctly \\ Mobile App methods calls} \\
+  		\textbf{Purpose} & \pbox{20cm}{Verify if Account Manager can handle correctly \\ Mobile App methods calls} \\
   		\hline
   	\end{tabular*}
   \end{table}
@@ -206,7 +206,7 @@
   		\hline
   		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
   		\hline
-  		\textbf{Purpose} & \pbox{20cm}{Verifies if Ride Request Manager can handle correctly \\ Mobile App methods calls} \\
+  		\textbf{Purpose} & \pbox{20cm}{Verify if Ride Request Manager can handle correctly \\ Mobile App methods calls} \\
   		\hline
   	\end{tabular*}
   \end{table}
@@ -224,7 +224,7 @@
 	\hline
 	\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Mobile App}\\
 	\hline
-	\textbf{Purpose} & \pbox{20cm}{Verifies if Mobile App can handle
+	\textbf{Purpose} & \pbox{20cm}{Verify if Mobile App can handle
 		correctly Notification Manager \\ methods calls} \\
 	\hline
     \end{tabular*}
@@ -243,7 +243,7 @@
   		\hline
 		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
   		\hline
-  		\textbf{Purpose} & \pbox{20cm}{Verifies if Account Manager can handle correctly \\ Web App methods calls} \\
+  		\textbf{Purpose} & \pbox{20cm}{Verify if Account Manager can handle correctly \\ Web App methods calls} \\
   		\hline
   	\end{tabular*}
   \end{table}
@@ -261,7 +261,7 @@
 		    \hline
 			\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
 			\hline
-      		\textbf{Purpose} & \pbox{20cm}{Verifies if Ride Request Manager can handle correctly \\ Web App methods calls} \\
+      		\textbf{Purpose} & \pbox{20cm}{Verify if Ride Request Manager can handle correctly \\ Web App methods calls} \\
       		\hline
       	\end{tabular*}
       \end{table}
@@ -280,10 +280,42 @@
   		\hline
 		\textbf{Environmental Needs} &  \pbox{20cm}{A device that can run Web App}\\
   		\hline
-  		\textbf{Purpose} & \pbox{20cm}{Verifies if Web App can handle correctly Notification methods calls} \\
+  		\textbf{Purpose} & \pbox{20cm}{Verify if Web App can handle correctly Notification methods calls} \\
   		\hline
   	\end{tabular*}
   \end{table}
 
-
-
+   \subsection{Test Case SI1}
+   \begin{table}[ht!]
+   	\begin{tabular*}{16cm}{ll}
+   		\hline
+   		\textbf{Test Item(s)} & Server Database $ \longleftrightarrow $ Server Application  \\
+   		\hline
+   		\textbf{Input Specification} & \pbox{20cm}{Queries on the DBMS for the Table User, Passenger, Taxi Driver and Ride}\\
+   		\hline
+   		\textbf{Output Specification} & \pbox{20cm}{The queries return the expected results}\\
+   		\hline
+   		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database}\\
+   		\hline
+   		\textbf{Purpose} & \pbox{20cm}{Verify that the typical queries to the DBMS works} \\
+   		\hline
+   	\end{tabular*}
+   \end{table}
+   
+   
+   \subsection{Test Case S2}
+   \begin{table}[ht!]
+   	\begin{tabular*}{16cm}{ll}
+   		\hline
+   		\textbf{Test Item(s)} & Server Application $ \longleftrightarrow $ Client  \\
+   		\hline
+   		\textbf{Input Specification} & \pbox{20cm}{A set of methods calls on both Server Application and Client }\\
+   		\hline
+   		\textbf{Output Specification} & \pbox{20cm}{Check that the methods calls mentioned in Input Specification produce \\ the expected results }\\
+   		\hline
+   		\textbf{Environmental Needs} &  \pbox{20cm}{Glassfish Server, a test Database}\\
+   		\hline
+   		\textbf{Purpose} & \pbox{20cm}{Verify that the interaction between Server Application and Client works} \\
+   		\hline
+   	\end{tabular*}
+   \end{table}   
