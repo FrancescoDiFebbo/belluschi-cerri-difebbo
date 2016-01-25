@@ -1,0 +1,38 @@
+The Functional Point approach is a technique that allows to evaluate the effort
+needed for the design and implementation of a project. We have used this technique
+to evaluate the application dimension basing on the functionalities of the
+application itself. The functionalities list has been obtained from the RASD document
+and for each one of them the realization complexity has been evaluated.
+The functionalities has been groped in:
+\begin{itemize}
+\item Internal Logic File: it represents a set of homogeneous data handled by the system
+\item External Interface File: it represents a set of homogeneous data used
+by the application but handled by external application
+\item External Input: elementary operation that allows input of data in the system
+\item External Output: elementary operation that creates a bit stream towards
+the outside of the application
+\item External Inquiry: elementary operation that involves input and output operations 
+\end{itemize}
+
+\newpage
+
+The following table outline the number of Functional Point based on functionality
+and relative complexity:
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | l | l | l |}
+		\hline
+		\multirow{2}{*}{\textbf{Function Type}} & \multicolumn{3}{c|}{\textbf{Complexity}} \\
+		\cline{2-4}
+		& Simple & Medium & Complex  \\
+		\hline
+		Internal Logic File & 7 & 10 & 15 \\ \hline
+		External Interface File & 5 & 7 & 10 \\ \hline
+		External Input & 3 & 4 & 6 \\ \hline
+		External Output & 4 & 5 & 7 \\ \hline
+		External Inquiry & 3 & 4 & 6 \\ \hline	
+		
+	\end{tabular}
+\end{table}
+

@@ -1,0 +1,81 @@
+\subsection{Internal Logic Files}
+
+The Internal Logic Files (ILFs) of the system are the following:
+
+\begin{itemize}
+	
+	\item User : medium complexity
+	\item Passenger : simple complexity
+	\item Taxi Driver : medium complexity
+	\item Ride : simple complexity
+	
+\end{itemize}
+
+
+\subsection{External Interface Files}
+
+The External Interface File (EIF) of the system is the following:
+
+\begin{itemize}
+	
+	\item Maps : is acquired from Google Maps services. High complexity
+	
+\end{itemize}
+
+\subsection{External Input}
+
+The External Inputs (EIs) of the system are the following:
+
+\begin{itemize}
+	
+	\item User Registration : medium complexity
+	\item User Login : simple complexity
+	\item User Logout : simple complexity
+	\item User Profile Management : simple complexity
+	\item Ride Request : high complexity
+	\item Taxi Availability : simple complexity
+	
+\end{itemize}
+
+\subsection{External Output}
+
+The External Outputs (EOs) of the system are the following:
+
+\begin{itemize}
+	
+	\item Passenger Notification : simple complexity
+	\item Confirmation e-mails : simple complexity
+	\item Taxi Driver Notification : simple complexity
+	
+\end{itemize}
+
+\subsection{External Inquiry}
+
+The External Outputs (EQs) of the system are the following:
+
+\begin{itemize}
+	
+	\item Ride Sharing : high complexity
+	\item Taxi Driver ride request handling : simple complexity
+	
+\end{itemize}
+
+\subsection{Summary}
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| l | l | l | l | l |}
+		\hline
+		\multirow{2}{*}{\textbf{Function Type}} & \multicolumn{3}{c|}{\textbf{Complexity-Weight}} & \multirow{2}{*}{\textbf{Total Points}} \\
+		\cline{2-4}
+		& Simple & Medium & Complex & \\
+		\hline
+		Internal Logic File & $ 2 \times 7  $ &  $ 2 \times 10  $ &  $ 0 \times 15  $  & 34 \\ \hline
+		External Interface File & $ 0 \times 5  $ & $ 0 \times 7  $ & $ 1 \times 10  $ & 10 \\ \hline
+		External Input & $ 3 \times 3  $ & $ 1 \times 4  $ & $ 2 \times 6  $ & 25 \\ \hline
+		External Output & $ 3 \times 4  $ & $ 0 \times 5  $ & $ 0 \times 7  $ & 12 \\ \hline
+		External Inquiry & $ 1 \times 3  $ & $ 0 \times 4  $ & $ 1 \times 6  $ & 9 \\ \hline	
+		\textbf{Total Points} & 38 & 24 & 28 & \textbf{90} \\
+		\hline
+	\end{tabular}
+\end{table}
