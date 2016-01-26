@@ -1,0 +1,118 @@
+\begin{itemize}
+	
+	\item\textbf{Required Software Reliability (RELY):} this is the measure of the extent to which the software must perform its intended function over a period of time. If the effect of a software failure is only slight inconvenience then RELY is very low. If a failure would risk human life then RELY is very high.
+	
+	\item\textbf{Data Base Size (DATA):} this cost driver attempts to capture the effect large test data requirements have on product development. The rating is determined by calculating D/P, the ratio of bytes in the testing database to SLOC in the program. The reason the size of the database is important to consider is because of the effort required to generate the test data that will be used to exercise the program. In other words, DATA is capturing the effort needed to assemble and maintain the data required to complete test of the program.
+	
+	\item\textbf{Product Complexity (CPLX):} it is divided into five areas: control operations, computational operations, device-dependent operations, data management operations, and user interface management operations. Each area or combination of areas characterize the product or the component of the product to be developed. The complexity rating is the subjective weighted average of the selected area ratings.
+	
+	\item\textbf{Developed for Reusability (RUSE):} this cost driver accounts for the additional effort needed to construct components intended for reuse on current or future projects. This effort is consumed with creating more generic design of software, more elaborate documentation, and more extensive testing to ensure components are ready for use in other applications. Development for reusability imposes constraints on the project's RELY and DOCU ratings. The RELY rating should be at most one level below the RUSE rating. The DOCU rating should be at least Nominal for Nominal and High RUSE ratings, and at least High for Very High and Extra High RUSE ratings.
+	
+	\item\textbf{Documentation Match to Life-Cycle Needs (DOCU):} several software cost models have a cost driver for the level of required documentation. The rating scale for the DOCU cost driver is evaluated in terms of the suitability of the project’s documentation to its life-cycle needs. The rating scale goes from Very Low (many life-cycle needs uncovered) to Very High (very excessive for life-cycle needs). Attempting to save costs via Very Low or Low documentation levels will generally incur extra costs during the maintenance portion of the life-cycle. Poor or missing documentation will increase the Software Understanding.
+	
+	\item\textbf{Execution Time Constraint (TIME):} this is a measure of the execution time constraint imposed upon a software system. The rating is expressed in terms of the percentage of available execution time expected to be used by the system or subsystem consuming the execution time resource. The rating ranges from nominal, less than 50\% of the execution time resource used, to extra high, 95\% of the execution time resource is consumed.
+	
+	\item\textbf{Main Storage Constraint (STOR):} this rating represents the degree of main storage constraint imposed on a software system or subsystem. The rating ranges from nominal (less than 50\%), to extra high (95\%). 
+	
+	\item\textbf{Platform Volatility (PVOL):} “Platform” is used here to mean the complex of hardware and software (OS, DBMS, etc.) the software product calls on to perform its tasks. If the software to be developed is an operating system then the platform is the computer hardware. If a database management system is to be developed then the platform is the hardware and the operating system. If a network text browser is to be developed then the platform is the network, computer hardware, the operating system, and the distributed information repositories. The platform includes any compilers or assemblers supporting the development of the software system. This rating ranges from low, where there is a major change every 12 months, to very high, where there is a major change every two weeks. 
+	
+	\item\textbf{Analyst Capability (ACAP):} Analysts are personnel who work on requirements, high-level design and detailed design.
+	The major attributes that should be considered in this rating are analysis and design ability,
+	efficiency and thoroughness, and the ability to communicate and cooperate. The rating should
+	not consider the level of experience of the analyst; that is rated with APEX, LTEX, and PLEX.
+	Analyst teams that fall in the fifteenth percentile are rated very low and those that fall in the
+	ninetieth percentile are rated as very high, see Table 26. 
+	
+	\item\textbf{Programmer Capability (PCAP):} Current trends continue to emphasize the importance of highly capable analysts.
+	However the increasing role of complex COTS packages, and the significant productivity
+	leverage associated with programmers’ ability to deal with these COTS packages, indicates a
+	trend toward higher importance of programmer capability as well.
+	Evaluation should be based on the capability of the programmers as a team rather than as
+	individuals. Major factors which should be considered in the rating are ability, efficiency and
+	thoroughness, and the ability to communicate and cooperate. The experience of the programmer should not be considered here; it is rated with APEX, LTEX, and PLEX. A very low rated
+	programmer team is in the fifteenth percentile and a very high rated programmer team is in the
+	ninetieth percentile, see Table 27. 
+	
+	\item\textbf{Personnel Continuity (PCON):} The rating scale for PCON is in terms of the project’s annual personnel turnover: from
+	3%, very high continuity, to 48%, very low continuity, see Table 28. 
+	
+	\item\textbf{Applications Experience (APEX):} The rating for this cost driver (formerly labeled AEXP) is dependent on the level of
+	applications experience of the project team developing the software system or subsystem. The
+	ratings are defined in terms of the project team’s equivalent level of experience with this type of
+	application. A very low rating is for application experience of less than 2 months. A very high
+	rating is for experience of 6 years or more, see Table 29. 
+	
+	\item\textbf{Platform Experience (PLEX):} The Post-Architecture model broadens the productivity influence of platform experience,
+	PLEX (formerly labeled PEXP), by recognizing the importance of understanding the use of more
+	powerful platforms, including more graphic user interface, database, networking, and distributed
+	middleware capabilities, see Table 30. 
+	
+	\item\textbf{Language and Tool Experience (LTEX):} This is a measure of the level of programming language and software tool experience of
+	the project team developing the software system or subsystem. Software development includes
+	the use of tools that perform requirements and design representation and analysis, configuration
+	management, document extraction, library management, program style and formatting,
+	consistency checking, planning and control, etc. In addition to experience in the project’s
+	programming language, experience on the project’s supporting tool set also affects development
+	effort. A low rating is given for experience of less than 2 months. A very high rating is given
+	for experience of 6 or more years, see Table 31. 
+	
+	\item\textbf{Use of Software Tools (TOOL):} Software tools have improved significantly since the 1970s’ projects used to calibrate the
+	1981 version of COCOMO. The tool rating ranges from simple edit and code, very low, to
+	integrated life-cycle management tools, very high. A Nominal TOOL rating in COCOMO 81 is
+	equivalent to a Very Low TOOL rating in COCOMO II. An emerging extension of COCOMO II
+	is in the process of elaborating the TOOL rating scale and breaking out the effects of TOOL
+	capability, maturity, and integration, see Table 32. 
+	
+	\item\textbf{Multisite Development (SITE):} Given the increasing frequency of multisite developments, and indications that multisite
+	development effects are significant, the SITE cost driver has been added in COCOMO II.
+	Determining its cost driver rating involves the assessment and judgement-based averaging of two
+	factors: site collocation (from fully collocated to international distribution) and communication
+	support (from surface mail and some phone access to full interactive multimedia).
+	For example, if a team is fully collocated, it doesn’t need interactive multimedia to
+	achieve an Extra High rating. Narrowband e-mail would usually be sufficient, see Table 33. 
+	
+	\item\textbf{Required Development Schedule (SCED):} This rating measures the schedule constraint imposed on the project team developing the
+	software. The ratings are defined in terms of the percentage of schedule stretch-out or
+	acceleration with respect to a nominal schedule for a project requiring a given amount of effort.
+	Accelerated schedules tend to produce more effort in the earlier phases to eliminate risks and
+	refine the architecture, more effort in the later phases to accomplish more testing and
+	documentation in parallel. In Table 34, schedule compression of 75% is rated very low. A
+	schedule stretch-out of 160% is rated very high. Stretch-outs do not add or decrease effort.
+	Their savings because of smaller team size are generally balanced by the need to carry project
+	administrative functions over a longer period of time. The nature of this balance is undergoing further research in concert with our emerging CORADMO extension to address rapid application
+	development (goto http://sunset.usc.edu/COCOMOII/suite.html for more information).
+	SCED is the only cost driver that is used to describe the effect of schedule compression /
+	expansion for the whole project. The scale factors are also used to describe the whole project.
+	All of the other cost drivers are used to describe each module in a multiple module project.
+	Using the COCOMO II Post-Architecture model for multiple module estimation is explained in
+	Section 3.3. 
+	
+	
+\end{itemize}
+
+\vspace{10mm}
+
+\begin{center}
+	\begin{tabular}{| l | c | c |}
+		\hline
+		\textbf{Cost driver} & \textbf{Factor} & \textbf{Value} \\ \hline
+		RELY & $$ & $$\\ \hline
+		DATA & $$ & $$\\ \hline
+		CPLX & $$ & $$\\ \hline
+		RUSE & $$ & $$\\ \hline
+		DOCU & $$ & $$\\ \hline
+		TIME & $$ & $$\\ \hline
+		STOR & $$ & $$\\ \hline
+		PVOL & $$ & $$\\ \hline
+		ACAP & $$ & $$\\ \hline
+		PCAP & $$ & $$\\ \hline
+		PCON & $$ & $$\\ \hline
+		APEX & $$ & $$\\ \hline
+		PLEX & $$ & $$\\ \hline
+		LTEX & $$ & $$\\ \hline
+		TOOL & $$ & $$\\ \hline
+		SITE & $$ & $$\\ \hline
+		SCED & $$ & $$\\ \hline
+		\multicolumn{2}{|l|}{\textbf{Total points}} & $$\\ \hline
+	\end{tabular}
+\end{center}
