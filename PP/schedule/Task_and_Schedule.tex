@@ -1,0 +1,72 @@
+\section{Tasks}
+The tasks of the project are:
+
+\begin{itemize}
+	
+	\item\textbf{T1} Requirement Analysis and Specification Document (RASD) : 
+	
+	\item\textbf{T2} Design Document (DD)
+	
+	\item\textbf{T3} Integration Testing Plan Document (ITPD)
+	
+	\item\textbf{T4} Project Plan (PP)
+	
+	\item\textbf{T5} Implementation
+	
+	\item\textbf{T6} Testing 
+	
+\end{itemize}
+
+
+
+\section{Schedule}
+
+The schedule of the project are shown in the following table:
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{| c | c | c |}
+		\hline
+		 Task & Start Date & Deadline  \\ \hline
+		\textbf{T1} & 2015-10-15  & 2015-11-06 \\ \hline
+		\textbf{T2} & 2015-11-11 & 2015-12-04 \\ \hline
+		\textbf{T3} & 2016-01-07 & 2016-01-21 \\ \hline
+		\textbf{T4} & 2016-01-21 & 2016-02-02 \\ \hline
+		\textbf{T5} & 2016-02-10 & 2016-07-15 \\ \hline
+		\textbf{T6} & 2016-07-21 & 2016-08-01 \\ \hline
+	\end{tabular}
+\end{table}
+\newpage
+The Gantt chart is: 
+
+
+\begin{center}
+	
+	\begin{ganttchart}[
+	    vgrid={*{6}{draw=none},dotted},
+		time slot format=isodate,
+		x unit=0.5mm,
+		today=2016-02-02,
+		today rule/.style= {green, thick},
+		today label=2016-02-02,
+		link bulge=6, link tolerance=5,
+		bar inline label node/.style={font=\scriptsize},
+		inline
+		]{2015-10-10}{2016-08-15}
+		\gantttitlecalendar{year, month} \\
+		\ganttbar[name=T1]{T1}{2015-10-15}{2015-11-06} \\
+		\ganttbar[name=T2]{T2}{2015-11-11}{2015-12-04} \\
+		\ganttbar[name=T3]{T3}{2016-01-07}{2016-01-21} \\
+		\ganttbar[name=T4]{T4}{2016-01-21}{2016-02-02} \\
+		\ganttbar[name=T5]{T5}{2016-02-10}{2016-07-15} \\
+		\ganttbar[name=T6]{T6}{2016-07-21}{2016-08-01} 
+		\ganttlink{T1}{T2}
+		\ganttlink{T2}{T3}
+		\ganttlink{T3}{T4}
+		\ganttlink{T4}{T5}
+		\ganttlink{T5}{T6}
+	\end{ganttchart}
+
+	
+\end{center}
